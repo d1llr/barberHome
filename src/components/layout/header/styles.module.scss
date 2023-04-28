@@ -1,0 +1,14 @@
+.header{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .location{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        span{
+            color: white;
+        }
+    }
+}
