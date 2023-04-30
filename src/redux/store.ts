@@ -1,19 +1,29 @@
 
 
 
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
+import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { barberApi } from './api/barberApi'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import {createWrapper} from 'next-redux-wrapper';
+import { createWrapper } from 'next-redux-wrapper';
+import StageSlice from './slices/StageSlice';
+import { getCompany } from './api/getCompanyApi';
+import { getServices } from './api/getServicesApi';
+import CartSlice from './slices/CartSlice';
+
+
 
 
 const makeStore = () =>
   configureStore({
     reducer: {
-      [barberApi.reducerPath]: barberApi.reducer
+      [barberApi.reducerPath]: barberApi.reducer,
+      [getCompany.reducerPath]: getCompany.reducer,
+      [getServices.reducerPath]: getServices.reducer,
+      stageSlice: StageSlice,
+      cartSlice: CartSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(barberApi.middleware),
+      getDefaultMiddleware().concat(barberApi.middleware, getCompany.middleware, getServices.middleware),
   });
 
 export const store = makeStore()

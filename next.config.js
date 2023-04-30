@@ -2,9 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["speedmouse.ru"],
+    domains: ["speedmouse.ru", 'assets.yclients.com'],
     formats: ["image/webp"],
   },
+  output: 'serverless',
+  distDir: 'dist',
 }
 
 module.exports = nextConfig
