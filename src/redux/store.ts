@@ -9,7 +9,7 @@ import StageSlice from './slices/StageSlice';
 import { getCompany } from './api/getCompanyApi';
 import { getServices } from './api/getServicesApi';
 import CartSlice from './slices/CartSlice';
-
+import orderStageSlice from './slices/orderStageSlice';
 
 
 
@@ -20,7 +20,8 @@ const makeStore = () =>
       [getCompany.reducerPath]: getCompany.reducer,
       [getServices.reducerPath]: getServices.reducer,
       stageSlice: StageSlice,
-      cartSlice: CartSlice
+      cartSlice: CartSlice,
+      orderStageSlice: orderStageSlice
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware),

@@ -48,7 +48,7 @@ const Barber = () => {
             <div className={styles.barber_wrapper}>
                 {isSuccess &&
                     data.map((item: Ibarber) => {
-                        return <div className={cart.barber != item.id ? styles.barber : styles.barber_checked} onClick={(e) => handleClick(e)} data-id={item.id}>
+                        return <div key={item.id} className={cart.barber != item.id ? styles.barber : styles.barber_checked} onClick={(e) => handleClick(e)} data-id={item.id}>
                             <div className={styles.image_wrapper}>
                                 <Image src={item.avatar} width={200} height={200} alt='Фото баребра' />
                             </div>
