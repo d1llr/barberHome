@@ -1,7 +1,6 @@
 
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { useGetStaffQuery } from '@/redux/api/barberApi'
 import Intro from '@/components/intro/Intro'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import CompanyChoise from '@/components/companyChoice/CompanyChoise'

@@ -2,7 +2,7 @@
 
 
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
-import { barberApi } from './api/barberApi'
+import { getBarber} from './api/getBarber'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { createWrapper } from 'next-redux-wrapper';
 import StageSlice from './slices/StageSlice';
@@ -16,14 +16,14 @@ import CartSlice from './slices/CartSlice';
 const makeStore = () =>
   configureStore({
     reducer: {
-      [barberApi.reducerPath]: barberApi.reducer,
+      [getBarber.reducerPath]: getBarber.reducer,
       [getCompany.reducerPath]: getCompany.reducer,
       [getServices.reducerPath]: getServices.reducer,
       stageSlice: StageSlice,
       cartSlice: CartSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(barberApi.middleware, getCompany.middleware, getServices.middleware),
+      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware),
   });
 
 export const store = makeStore()

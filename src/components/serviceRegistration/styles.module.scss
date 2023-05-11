@@ -44,21 +44,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.6;
             span {
                 color: #fff;
             }
         }
         .item_current {
             @extend .item;
-            opacity: 1;
             -webkit-box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
             -moz-box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
             box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
         }
         .item_checked {
             @extend .item;
-            opacity: 1;
+        }
+
+        .item_inactive {
+            @extend .item;
+            background-color: #c0bb98;
+            user-select: none;
+            span {
+                color: #aaa;
+            }
         }
         .line {
             width: 20%;
@@ -71,8 +77,10 @@
         width: 100%;
         h2 {
             color: #fff;
+            margin: 1em 0;
         }
         .services_wrapper {
+            margin: 1em 0.3em;
             h3 {
                 color: #fff;
                 text-decoration: underline;
@@ -109,24 +117,112 @@
                     align-items: center;
                     -webkit-transition-duration: 0.4s;
                     transition-duration: 0.4s;
-                    .title{
+                    .title {
                         color: #fff;
                         text-align: center;
                     }
-                    .price{
+                    .price {
                         color: #aaa;
                     }
                 }
-                .block_checked{
+                .block_checked {
                     @extend .block;
                     background-color: #ffe100;
-                    .title{
+                    .title {
                         color: #000;
                     }
-                    .price{
+                    .price {
                         color: #141414;
                     }
                 }
+            }
+        }
+    }
+    .barber_container {
+        @extend .services_container;
+        width: 100%;
+
+        .barber_wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            .barber {
+                padding: 1.3em;
+                cursor: pointer;
+                position: relative;
+                background: #00000088;
+                width: 35%;
+                border-radius: 20px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin: 4px 4px;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-transition-duration: 0.4s;
+                transition-duration: 0.4s;
+                .image_wrapper {
+                    width: 100px;
+                    height: 100px;
+                    overflow: hidden;
+                    background: #fff;
+                    border-radius: 100px;
+                    margin: 10px auto;
+                    border: 3px solid #eee;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .name {
+                    position: relative;
+                    line-height: 1.2;
+                    color: #fff;
+                    font-size: 17px;
+                    text-align: center;
+                    margin: 0 0 6px 0;
+                }
+                .role {
+                    position: relative;
+                    font-size: 15px;
+                    color: #aaa;
+                    text-align: center;
+                    margin: 0.2em 0;
+                }
+                .rating {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    .stars {
+                        color: #ff0;
+                    }
+                    .comments {
+                        font-size: 16px;
+                        color: #ddd;
+                        user-select: none;
+                        text-align: right;
+                    }
+                }
+            }
+
+            .barber_checked {
+                @extend .barber;
+                .image_wrapper {
+                    border: 2px solid #ff0;
+                }
+                -webkit-box-shadow: 0 2px 0 #ff0;
+                box-shadow: 0 2px 0 #ff0;
             }
         }
     }
