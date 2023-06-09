@@ -65,9 +65,9 @@ const ServiceRegistration = () => {
             case 2:
                 return <Barber />
                 break;
-            // case 3:
-            //     return <Dates />
-            //     break;
+            case 3:
+                return <Dates />
+                break;
             default:
                 break;
         }
