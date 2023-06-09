@@ -1,5 +1,8 @@
+
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { CartState, PullService } from './CartSlice'
+import { useAppSelector } from '../store'
 
 interface StageState {
   stage: number
@@ -9,12 +12,22 @@ const initialState = {
   stage: 1
 } as StageState
 
+
+interface ActionP {
+  stage: number,
+  examination: CartState
+}
+
+
 const orderStageSlice = createSlice({
   name: 'orderStageSlice',
   initialState,
   reducers: {
-    nextStage(state, action: PayloadAction<number>) {
-      state.stage += action.payload
+    setStage(state, action: PayloadAction<number>) {
+      state.stage = action.payload
+    },
+    nextStage(state) {
+      state.stage++
     },
     prevStage(state) {
       state.stage--
@@ -31,5 +44,5 @@ const orderStageSlice = createSlice({
   },
 })
 
-export const { nextStage, prevStage } = orderStageSlice.actions
+export const { setStage, nextStage, prevStage } = orderStageSlice.actions
 export default orderStageSlice.reducer

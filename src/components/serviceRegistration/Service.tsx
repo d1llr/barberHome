@@ -42,7 +42,7 @@ interface IService {
 const Service: React.FC = () => {
 
 
-    const { data, isLoading, isError, isSuccess } = useGetServicesQuery('')
+    const { data, isLoading, isError, isSuccess, isFetching } = useGetServicesQuery('')
     const checkedServices = useAppSelector(state => state.cartSlice.services)
     const dispatch = useAppDispatch()
     const [current, setCurrent] = useState<string>('default')
@@ -65,6 +65,7 @@ const Service: React.FC = () => {
             dispatch(PullService(Number(event.currentTarget.dataset.id)))
         }
     }
+    console.log(data);
     return (
         <div className={styles.services_container}>
             <ul>
@@ -107,6 +108,24 @@ const Service: React.FC = () => {
                             </div>
                         </div>
                 })
+            }
+            {
+                isLoading &&
+                <div>
+                    Loading...
+                </div>
+            }
+            {
+                isError &&
+                <div>
+                    Error...
+                </div>
+            }
+            {
+                isFetching &&
+                <div>
+                    Fetching...
+                </div>
             }
         </div>
     );

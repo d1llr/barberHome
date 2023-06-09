@@ -10,6 +10,7 @@ import { getCompany } from './api/getCompanyApi';
 import { getServices } from './api/getServicesApi';
 import CartSlice from './slices/CartSlice';
 import orderStageSlice from './slices/orderStageSlice';
+import { getDates } from './api/getDates';
 
 
 
@@ -19,12 +20,13 @@ const makeStore = () =>
       [getBarber.reducerPath]: getBarber.reducer,
       [getCompany.reducerPath]: getCompany.reducer,
       [getServices.reducerPath]: getServices.reducer,
+      [getDates.reducerPath]: getDates.reducer,
       stageSlice: StageSlice,
       cartSlice: CartSlice,
       orderStageSlice: orderStageSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware),
+      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware, getDates.middleware),
   });
 
 export const store = makeStore()

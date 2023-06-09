@@ -1,18 +1,19 @@
+
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-interface CartState {
+export interface CartState {
     services: Array<number>,
     barber: number,
-    date:string,
-    result:Array<string>
+    date: string,
+    result: Array<string>
 }
 
 const initialState = {
     services: [],
     barber: 0,
-    date:'',
-    result:['']
+    date: '',
+    result: ['']
 } as CartState
 
 const cartSlice = createSlice({
@@ -23,10 +24,18 @@ const cartSlice = createSlice({
             state.services.push(action.payload)
         },
         RemoveService(state, action: PayloadAction<number>) {
-            state.services = state.services.filter(item=>item != action.payload)
-        },
-        RemoveAllService(state){
+            state.services = state.services.filter(item => item != action.payload)
+            if(state.services.length == 0) {
+                state.barber = 0
+                state.date = ''
+            }
+            },
+        RemoveAllService(state) {
             state.services = []
+            if(state.services.length == 0) {
+                state.barber = 0
+                state.date = ''
+            }
         },
         PullBarber(state, action: PayloadAction<number>) {
             state.barber = action.payload
@@ -44,7 +53,17 @@ const cartSlice = createSlice({
         //   state.stage += action.payload
         // },
     },
+    extraReducers: builder => {
+        builder.addCase(RemoveService, state => {
+            if (state.services.length == 0) {
+                console.log('-barber');
+                
+                state.barber = 0
+                state.date = ''
+            }
+        })
+    }
 })
 
-export const { PullService,RemoveService, PullBarber, RemoveBarber,RemoveAllService } = cartSlice.actions
+export const { PullService, RemoveService, PullBarber, RemoveBarber, RemoveAllService } = cartSlice.actions
 export default cartSlice.reducer

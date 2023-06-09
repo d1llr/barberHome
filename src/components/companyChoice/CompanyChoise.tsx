@@ -9,6 +9,8 @@ import { nextStage } from '@/redux/slices/StageSlice';
 const CompanyChoise = () => {
     const { data, isError, isLoading, isSuccess } = useGetCompanyQuery('')
     const dispatch = useAppDispatch()
+    console.log(data);
+    
     return (
         <main className={styles.main}>
             {/* <span className={styles.header_text}>
