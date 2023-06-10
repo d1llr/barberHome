@@ -24,7 +24,7 @@ const Dates = () => {
             <ul>
                 {isSuccess && data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
                     if (index < 5) {
-                        return <li><span>{day}</span></li>
+                        return <li key={index}><span>{day}</span></li>
                     }
                     else {
 
