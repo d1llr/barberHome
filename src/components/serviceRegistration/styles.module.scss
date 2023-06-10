@@ -77,7 +77,7 @@
     .buttons_container {
         display: flex;
         position: absolute;
-        bottom: 10px;
+        bottom: -100px;
         left: 50%;
         flex-direction: row;
         transform: translateX(-50%);
@@ -87,6 +87,7 @@
             color: black;
             border-radius: 15px;
             border: none;
+            margin: 0 0.5em;
             text-align: center;
             font-size: 20px;
         }
