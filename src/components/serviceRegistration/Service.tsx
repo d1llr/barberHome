@@ -49,10 +49,10 @@ const Service: React.FC = () => {
     let services: number[] = []
 
     if (current == 'pro') {
-        services = [8230675, 8230857, 8231006, 8231025]
+        services = [12652125, 12652128, 12652121, 12652131]
     }
     else {
-        services = [4242168, 4242169, 4242170, 4242173]
+        services = [12652126, 12652129, 12652123, 12652132]
     }
 
 

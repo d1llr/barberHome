@@ -74,14 +74,14 @@
         }
     }
 
-    .buttons_container{
+    .buttons_container {
         display: flex;
         position: absolute;
         bottom: 10px;
         left: 50%;
         flex-direction: row;
         transform: translateX(-50%);
-        button{
+        button {
             padding: 1em 2em;
             background-color: #ff0;
             color: black;
@@ -245,7 +245,36 @@
             }
         }
     }
-    .dates_container{
-        
+    .dates_container {
+        @extend .services_container;
+        p {
+            font-size: 20px;
+            color: #fff;
+        }
+        ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            li {
+                backdrop-filter: blur(10px);
+                list-style-type: none;
+                border-radius: 10px;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                span {
+                    font-size: 20px;
+                    color: #fff;
+                }
+                &:hover {
+                    border: 1px solid #ff0;
+                    transition: 0.1s all;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
