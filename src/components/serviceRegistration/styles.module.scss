@@ -81,6 +81,7 @@
         left: 50%;
         flex-direction: row;
         transform: translateX(-50%);
+        z-index: 999;
         button {
             padding: 1em 2em;
             background-color: #ff0;
