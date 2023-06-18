@@ -88,9 +88,6 @@ const Service: React.FC = () => {
                         PRO услуги
                     </li>
                 </ul>
-                <h2>
-                    Выбор услуги
-                </h2>
                 {isSuccess &&
                     data.category.map((category: ICategory) => {
                         if (services.includes(category.id))
