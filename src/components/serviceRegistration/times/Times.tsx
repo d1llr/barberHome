@@ -16,8 +16,8 @@ export function Times({ barber, date }: TimesApi): JSX.Element {
     return (
         isLoading ? <LoadingPage/> : 
         <ul className={s.ul}>
-            {isSuccess && data.map((item:Root)=>{
-                return <li>
+            {isSuccess && data.map((item:Root, index: number)=>{
+                return <li key={index}>
                     {item.time}
                 </li>
             })}
