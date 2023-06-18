@@ -12,7 +12,7 @@
   position: relative;
   width: 100%;
   max-width: 576px;
-  height: 100vh;
+  height: 100svh;
   margin: 0 auto;
   background: #0e163d url("https://speedmouse.ru/index/img/4.jpg") no-repeat;
   background-size: cover;
