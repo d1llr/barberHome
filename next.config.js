@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["speedmouse.ru", 'assets.yclients.com'],
+    domains: ["speedmouse.ru", 'assets.yclients.com','be.cdn.yclients.com'],
     formats: ["image/webp"],
   },
   output: 'serverless',

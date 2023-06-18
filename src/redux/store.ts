@@ -11,6 +11,8 @@ import { getServices } from './api/getServicesApi';
 import CartSlice from './slices/CartSlice';
 import orderStageSlice from './slices/orderStageSlice';
 import { getDates } from './api/getDates';
+import { getTimes } from './api/getTimes';
+import { getTime } from 'date-fns';
 
 
 
@@ -21,12 +23,13 @@ const makeStore = () =>
       [getCompany.reducerPath]: getCompany.reducer,
       [getServices.reducerPath]: getServices.reducer,
       [getDates.reducerPath]: getDates.reducer,
+      [getTimes.reducerPath]: getTimes.reducer,
       stageSlice: StageSlice,
       cartSlice: CartSlice,
       orderStageSlice: orderStageSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware, getDates.middleware),
+      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware, getDates.middleware, getTimes.middleware),
   });
 
 export const store = makeStore()

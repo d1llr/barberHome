@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import backImage from '../../../public/img/back.png'
 import { useAppDispatch } from '@/redux/store';
 import { nextStage } from '@/redux/slices/StageSlice';
+import LoadingPage from '../loading/LoadingPage';
 
 const CompanyChoise = () => {
     const { data, isError, isLoading, isSuccess } = useGetCompanyQuery('')
@@ -17,9 +18,7 @@ const CompanyChoise = () => {
                 В какое отделение?
             </span> */}
 
-            {isLoading && <div className={styles.department}>
-                <Skeleton count={5} />
-            </div>}
+            {isLoading && <LoadingPage/>}
 
             {isSuccess && <div className={styles.department}>
                 <div className={styles.image_wrapper}>

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { PullBarber, PullService, RemoveBarber, RemoveService } from '@/redux/slices/CartSlice'
 import { useGetBarberQuery } from '@/redux/api/getBarber'
 import Image from 'next/image'
+import LoadingPage from '../loading/LoadingPage'
 
 interface Ibarber {
     api_id: number,
@@ -41,7 +42,8 @@ const Barber = () => {
         console.log(cart);
     }
     return (
-        <div className={styles.barber_container}>
+        isLoading ? <LoadingPage /> :
+        <main className={styles.barber_container}>
             <h2>
                 Выбор мастера
             </h2>
@@ -71,7 +73,7 @@ const Barber = () => {
                 }
             </div>
 
-        </div>
+        </main>
     );
 }
 

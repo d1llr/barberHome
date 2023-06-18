@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { PullService, RemoveAllService, RemoveService } from '@/redux/slices/CartSlice'
 import React, { useEffect, useState } from 'react'
+import LoadingPage from '../loading/LoadingPage'
 
 interface ICategory {
     api_id: number,
@@ -67,67 +68,56 @@ const Service: React.FC = () => {
     }
     console.log(data);
     return (
-        <div className={styles.services_container}>
-            <ul>
-                <li
-                    className={current == 'default' ? styles.li_checked : styles.li}
-                    onClick={() => {
-                        setCurrent('default')
-                        dispatch(RemoveAllService())
-                    }}>
-                    Услуги
-                </li>
-                <li
-                    className={current == 'pro' ? styles.li_checked : styles.li}
-                    onClick={() => {
-                        setCurrent('pro')
-                        dispatch(RemoveAllService())
-                    }}>
-                    PRO услуги
-                </li>
-            </ul>
-            <h2>
-                Выбор услуги
-            </h2>
-            {isSuccess &&
-                data.category.map((category: ICategory) => {
-                    if (services.includes(category.id))
-                        return <div className={styles.services_wrapper}>
-                            <h3>{category.title}</h3>
-                            <div className={styles.service}>
-                                {data.services.map((el: IService) => {
-                                    if (el.category_id == category.id)
-                                        return <div
-                                            className={checkedServices.includes(el.id) ? styles.block_checked : styles.block}
-                                            onClick={(e) => handleClick(e)}
-                                            data-id={el.id}>
-                                            <span className={styles.title}>{el.title}</span>
-                                            <span className={styles.price}>{el.price_min}₽</span>
-                                        </div>
-                                })}
+        isLoading ? <LoadingPage /> :
+            <div className={styles.services_container}>
+                <ul>
+                    <li
+                        className={current == 'default' ? styles.li_checked : styles.li}
+                        onClick={() => {
+                            setCurrent('default')
+                            dispatch(RemoveAllService())
+                        }}>
+                        Услуги
+                    </li>
+                    <li
+                        className={current == 'pro' ? styles.li_checked : styles.li}
+                        onClick={() => {
+                            setCurrent('pro')
+                            dispatch(RemoveAllService())
+                        }}>
+                        PRO услуги
+                    </li>
+                </ul>
+                <h2>
+                    Выбор услуги
+                </h2>
+                {isSuccess &&
+                    data.category.map((category: ICategory) => {
+                        if (services.includes(category.id))
+                            return <div className={styles.services_wrapper}>
+                                <h3>{category.title}</h3>
+                                <div className={styles.service}>
+                                    {data.services.map((el: IService) => {
+                                        if (el.category_id == category.id)
+                                            return <div
+                                                className={checkedServices.includes(el.id) ? styles.block_checked : styles.block}
+                                                onClick={(e) => handleClick(e)}
+                                                data-id={el.id}>
+                                                <span className={styles.title}>{el.title}</span>
+                                                <span className={styles.price}>{el.price_min}₽</span>
+                                            </div>
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                })
-            }
-            {
-                isLoading &&
-                <div>
-                    Loading...
-                </div>
-            }
-            {
-                isError &&
-                <div>
-                    Error...
-                </div>
-            }
-            {
-                isFetching &&
-                <div>
-                    Fetching...
-                </div>
-            }
-        </div>
+                    })
+                }
+                {
+                    isError &&
+                    <div>
+                        Error...
+                    </div>
+                }
+            </div>
     );
 }
 

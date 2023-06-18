@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -43,6 +44,14 @@ const cartSlice = createSlice({
         RemoveBarber(state) {
             state.barber = 0
         },
+
+        setDates(state, action: PayloadAction<string>){
+            state.date = action.payload
+        }, 
+
+        removeDates(state){
+            state.date = ''
+        }, 
         // decrement(state) {
         //     action.payload ? 
         //     state.stage += action.payload
@@ -65,5 +74,5 @@ const cartSlice = createSlice({
     }
 })
 
-export const { PullService, RemoveService, PullBarber, RemoveBarber, RemoveAllService } = cartSlice.actions
+export const { PullService, RemoveService, PullBarber, RemoveBarber, RemoveAllService, setDates, removeDates } = cartSlice.actions
 export default cartSlice.reducer
