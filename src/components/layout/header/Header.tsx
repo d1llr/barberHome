@@ -19,12 +19,12 @@ const Header = () => {
         <header className={styles.header}>
             {state &&
                 <div className={styles.backImage_wrapper}>
-                    <Image src={backImage} alt='Back image' width={30} height={30} onClick={()=>dispatch(prevStage())}/>
+                    <Image src={backImage} alt='Back image' width={20} height={20} onClick={()=>dispatch(prevStage())}/>
                 </div>
             }
             {state ? 
             <div className={styles.location_wrapper}>
-                <Image src={logo} width={100} height={100} alt='logo' />
+                <Image src={logo} width={70} height={70} alt='logo' />
             </div>:
             <div className={styles.location_wrapper}>
                 <div className={styles.location}>
