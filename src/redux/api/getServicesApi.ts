@@ -8,7 +8,7 @@ export const getServices = createApi({
   reducerPath: 'getServices',
   baseQuery: fetchBaseQuery({ baseUrl: '/'}),
   endpoints: (builder) => ({
-    getServices: builder.query<any, string>({
+    getServices: builder.query<any, any>({
       query: () => `api/getServices`
     }),
   }),

@@ -7,6 +7,7 @@ export interface CartState {
     services: Array<number>,
     barber: number,
     date: string,
+    dateTime: string,
     result: Array<string>
 }
 
@@ -14,6 +15,7 @@ const initialState = {
     services: [],
     barber: 0,
     date: '',
+    dateTime: '',
     result: ['']
 } as CartState
 
@@ -26,16 +28,18 @@ const cartSlice = createSlice({
         },
         RemoveService(state, action: PayloadAction<number>) {
             state.services = state.services.filter(item => item != action.payload)
-            if(state.services.length == 0) {
+            if (state.services.length == 0) {
                 state.barber = 0
                 state.date = ''
+                state.dateTime = ''
             }
-            },
+        },
         RemoveAllService(state) {
             state.services = []
-            if(state.services.length == 0) {
+            if (state.services.length == 0) {
                 state.barber = 0
                 state.date = ''
+                state.dateTime = ''
             }
         },
         PullBarber(state, action: PayloadAction<number>) {
@@ -45,13 +49,21 @@ const cartSlice = createSlice({
             state.barber = 0
         },
 
-        setDates(state, action: PayloadAction<string>){
+        setDates(state, action: PayloadAction<string>) {
             state.date = action.payload
-        }, 
+        },
 
-        removeDates(state){
+        removeDates(state) {
             state.date = ''
-        }, 
+        },
+
+        setDateTime(state, action: PayloadAction<string>) {
+            state.dateTime = action.payload
+        },
+
+        removeDateTime(state) {
+            state.dateTime = ''
+        },
         // decrement(state) {
         //     action.payload ? 
         //     state.stage += action.payload
@@ -66,7 +78,7 @@ const cartSlice = createSlice({
         builder.addCase(RemoveService, state => {
             if (state.services.length == 0) {
                 console.log('-barber');
-                
+                state.dateTime = ''
                 state.barber = 0
                 state.date = ''
             }
@@ -74,5 +86,16 @@ const cartSlice = createSlice({
     }
 })
 
-export const { PullService, RemoveService, PullBarber, RemoveBarber, RemoveAllService, setDates, removeDates } = cartSlice.actions
+export const {
+    PullService,
+    RemoveService,
+    PullBarber,
+    RemoveBarber,
+    RemoveAllService,
+    setDates,
+    removeDates,
+    setDateTime,
+    removeDateTime
+} = cartSlice.actions
+
 export default cartSlice.reducer

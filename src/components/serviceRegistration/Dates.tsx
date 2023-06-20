@@ -14,7 +14,6 @@ const Dates = () => {
     const cart = useAppSelector(state => state.cartSlice)
     const dispatch = useAppDispatch()
     const { data, isLoading, isError, isSuccess } = useGetDatesQuery(cart.barber)
-
     const [calendarOpen, setCalendarOpen] = useState(false)
 
     const months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
@@ -38,23 +37,19 @@ const Dates = () => {
     }
 
 
-    const daysInMonth = useCallback((month: number, year: number) =>  {
+    const daysInMonth = useCallback((month: number, year: number) => {
         console.log(new Date(year, month - 1, 0).getDate());
         let arr = []
         for (let index = 1; index <= new Date(year, month - 1, 0).getDate(); index++) {
             arr.push(index)
         }
         return arr
-    },[isSuccess])
+    }, [isSuccess])
 
     // проверка на сегодняшний день, для того, чтобы сразу выбирать нынешнюю дату как активную
     useEffect(() => {
-        if (isSuccess)
+        if (isSuccess && cart.date == '')
             dispatch(setDates(data.booking_dates[0]))
-        // data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
-        //     today.getDate() == day ? handleClick(day) : console.log('error')
-        // }
-        // )
     }, [isSuccess])
 
     return (
@@ -96,7 +91,7 @@ const Dates = () => {
                             {monthsI[today.getMonth()]} {today.getFullYear()}
                         </div>
                         <ul className={styles.ul_dates}>
-                            {daysInMonth(today.getMonth(), today.getFullYear()).map((item:number, index) => {
+                            {daysInMonth(today.getMonth(), today.getFullYear()).map((item: number, index) => {
                                 if (data.booking_days[today.getMonth() + 1].includes(item)) {
                                     return <li
                                         key={index}

@@ -27,20 +27,17 @@ interface Ibarber {
 const Barber = () => {
     const cart = useAppSelector(state => state.cartSlice)
     const { data, isLoading, isError, isSuccess } = useGetBarberQuery(cart.services)
-
     const dispatch = useAppDispatch()
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-
         if (cart.barber == Number(event.currentTarget.dataset.id)) {
             dispatch(RemoveBarber())
         }
         else {
             dispatch(PullBarber(Number(event.currentTarget.dataset.id)))
         }
-
-        console.log(cart);
     }
+
     return (
         isLoading ? <LoadingPage /> :
         <main className={styles.barber_container}>
@@ -52,7 +49,7 @@ const Barber = () => {
                     data.map((item: Ibarber) => {
                         return <div key={item.id} className={cart.barber != item.id ? styles.barber : styles.barber_checked} onClick={(e) => handleClick(e)} data-id={item.id}>
                             <div className={styles.image_wrapper}>
-                                <Image src={item.avatar} width={200} height={200} alt='Фото баребра' />
+                                <Image src={item.avatar} width={200} height={200} alt='Фото барбера' />
                             </div>
                             <span className={styles.name}>
                                 {item.name}

@@ -58,7 +58,6 @@ const Service: React.FC = () => {
 
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-
         if (checkedServices.includes(Number(event.currentTarget.dataset.id))) {
             dispatch(RemoveService(Number(event.currentTarget.dataset.id)))
         }
@@ -66,7 +65,8 @@ const Service: React.FC = () => {
             dispatch(PullService(Number(event.currentTarget.dataset.id)))
         }
     }
-    console.log(data);
+
+    
     return (
         isLoading ? <LoadingPage /> :
             <div className={styles.services_container}>

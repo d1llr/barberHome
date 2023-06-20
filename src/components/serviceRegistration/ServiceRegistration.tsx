@@ -77,6 +77,9 @@ const ServiceRegistration = () => {
 
     const handleNextStage = (stage: number) => {
         switch (stage) {
+            case 1:
+                dispatch(setStage(1))
+                break;
             case 2:
                 cart.services.length != 0 && dispatch(setStage(2))
                 break;
@@ -84,6 +87,12 @@ const ServiceRegistration = () => {
                 cart.services.length == 0 ? dispatch(setStage(1)) :
                     cart.barber == 0 ? dispatch(setStage(2)) :
                         dispatch(setStage(3))
+                break;
+            case 4:
+                cart.services.length == 0 ? dispatch(setStage(1)) :
+                    cart.barber == 0 ? dispatch(setStage(2)) :
+                        cart.dateTime == '' ? dispatch(setStage(3)) :
+                            dispatch(setStage(4))
                 break;
 
             default:
@@ -115,7 +124,7 @@ const ServiceRegistration = () => {
                 </div>
                 <div className={styles.line}></div>
                 <div
-                    className={stage == 4 && cart.date != '' ? styles.item_current : styles.item_unavailable}
+                    className={stage == 4 ? styles.item_current : cart.dateTime !== '' ? styles.item_available : styles.item_unavailable}
                     onClick={() => handleNextStage(4)}>
                     <span>4</span>
                 </div>
