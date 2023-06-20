@@ -28,8 +28,6 @@ export function Times({ barber, date }: TimesApi): JSX.Element {
         isLoading ? <LoadingPage /> :
             <ul className={s.ul}>
                 {isSuccess && data.map((item: Root, index: number) => {
-
-
                     return <li
                         key={index}
                         className={cart.dateTime == item.datetime ? s.li_checked : s.li}

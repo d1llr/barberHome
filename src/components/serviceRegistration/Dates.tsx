@@ -6,7 +6,7 @@ import Image from "next/image";
 import calendarImage from '../../../public/img/calendar.png'
 import { TimesApi, getTimes, useGetTimesQuery } from "@/redux/api/getTimes";
 import { Times } from "./times/Times";
-import { removeDates, setDates } from "@/redux/slices/CartSlice";
+import { removeDateTime, removeDates, setDates } from "@/redux/slices/CartSlice";
 import LoadingPage from "../loading/LoadingPage";
 import { setDate } from "date-fns";
 
@@ -25,6 +25,7 @@ const Dates = () => {
     const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         if (event.currentTarget.dataset.id) {
             if (cart.date != data.booking_dates[event.currentTarget.dataset.id])
+                dispatch(removeDateTime())
                 dispatch(setDates(event.currentTarget.dataset.id))
         }
 
