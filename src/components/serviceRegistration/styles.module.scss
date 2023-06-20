@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 1em;
+    padding: 0 0.5em;
     overflow-y: scroll;
     ul {
         display: flex;
@@ -30,11 +30,11 @@
         }
     }
     .stages_container {
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 0 0 1em 0;
+        padding: 0.5em 0 1em 0;
         align-items: center;
         .item {
             background-color: #ffe100;
@@ -46,14 +46,14 @@
             align-items: center;
             justify-content: center;
             span {
-                color: #fff;
+                color: #000000;
             }
         }
         .item_current {
             @extend .item;
-            -webkit-box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
+            -webkit-box-shadow: 0px 0px 20px 1px rgba(234, 219, 22, 0.24);
             -moz-box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
-            box-shadow: 0px 0px 26px 12px rgba(234, 219, 22, 0.24);
+            box-shadow: 0px 0px 2px 5px rgba(234, 219, 22, 0.24);
         }
         .item_available {
             @extend .item;
@@ -102,7 +102,7 @@
             margin: 1em 0;
         }
         .services_wrapper {
-            margin: 1em 0.3em;
+            margin: 1em 0em;
             backdrop-filter: blur(100px);
             border-radius: 20px;
             padding: 1vw;
@@ -212,7 +212,7 @@
                 cursor: pointer;
                 position: relative;
                 background: #00000088;
-                width: 35%;
+                width: 45%;
                 border-radius: 20px;
                 display: -webkit-box;
                 display: -ms-flexbox;
