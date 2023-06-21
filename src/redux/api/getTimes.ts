@@ -4,7 +4,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface TimesApi {
     barber:number,
-    date: string
+    date: string,
+    departmentID?: number
 }
 
 
@@ -14,7 +15,7 @@ export const getTimes = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: '/'}),
   endpoints: (builder) => ({
     getTimes: builder.query<any, TimesApi>({
-      query: ({barber,date}) => `api/getTimes?staff_id=${barber}&date=${date}`
+      query: ({barber,date,departmentID}) => `api/getTimes?staff_id=${barber}&date=${date}&departmentID=${departmentID}`
     }),
   }),
 })

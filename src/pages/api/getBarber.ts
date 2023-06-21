@@ -1,13 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { useAppSelector } from '@/redux/store';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = 'ctxn2pt2jwz2ushknuds'
-  const { services } = req.query; 
-
-  axios.get('https://api.yclients.com/api/v1/book_staff/256926', {
+  const { services, departmentID } = req.query; 
+  axios.get(`https://api.yclients.com/api/v1/book_staff/${departmentID}`, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/vnd.yclients.v2+json'

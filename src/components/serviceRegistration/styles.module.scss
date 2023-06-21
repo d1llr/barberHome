@@ -283,6 +283,13 @@
                 -webkit-box-shadow: 0 2px 0 #ff0;
                 box-shadow: 0 2px 0 #ff0;
             }
+            .unknown{
+                @extend .barber;
+                width: 100%;
+                .rating{
+                    justify-content: center;
+                }
+            }
         }
     }
     .dates_container {

@@ -1,6 +1,3 @@
-
-
-
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { getBarber} from './api/getBarber'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'

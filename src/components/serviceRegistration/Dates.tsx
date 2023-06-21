@@ -13,7 +13,7 @@ import { setDate } from "date-fns";
 const Dates = () => {
     const cart = useAppSelector(state => state.cartSlice)
     const dispatch = useAppDispatch()
-    const { data, isLoading, isError, isSuccess } = useGetDatesQuery(cart.barber)
+    const { data, isLoading, isError, isSuccess } = useGetDatesQuery({barber: cart.barber, departmentID : cart.department.id})
     const [calendarOpen, setCalendarOpen] = useState(false)
 
     const months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];

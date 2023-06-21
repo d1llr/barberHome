@@ -5,6 +5,9 @@ import { PullBarber, PullService, RemoveBarber, RemoveService } from '@/redux/sl
 import { useGetBarberQuery } from '@/redux/api/getBarber'
 import Image from 'next/image'
 import LoadingPage from '../loading/LoadingPage'
+import sadSmile from '../../../public/img/sadsmile.png'
+
+
 
 interface Ibarber {
     api_id: number,
@@ -26,7 +29,7 @@ interface Ibarber {
 
 const Barber = () => {
     const cart = useAppSelector(state => state.cartSlice)
-    const { data, isLoading, isError, isSuccess } = useGetBarberQuery(cart.services)
+    const { data, isLoading, isError, isSuccess } = useGetBarberQuery({ services: cart.services, departmentID: cart.department.id })
     const dispatch = useAppDispatch()
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -40,34 +43,52 @@ const Barber = () => {
 
     return (
         isLoading ? <LoadingPage /> :
-        <main className={styles.barber_container}>
-            <div className={styles.barber_wrapper}>
-                {isSuccess &&
-                    data.map((item: Ibarber) => {
-                        return <div key={item.id} className={cart.barber != item.id ? styles.barber : styles.barber_checked} onClick={(e) => handleClick(e)} data-id={item.id}>
+            <main className={styles.barber_container}>
+                <div className={styles.barber_wrapper}>
+                    {isSuccess &&
+                        data.length != 0 ?
+                        data.map((item: Ibarber) => {
+                            return <div key={item.id} className={cart.barber != item.id ? styles.barber : styles.barber_checked} onClick={(e) => handleClick(e)} data-id={item.id}>
+                                <div className={styles.image_wrapper}>
+                                    <Image src={item.avatar} width={200} height={200} alt='Фото барбера' />
+                                </div>
+                                <span className={styles.name}>
+                                    {item.name}
+                                </span>
+                                <span className={styles.role}>
+                                    {item.specialization}
+                                </span>
+                                <div className={styles.rating}>
+                                    <span className={styles.stars}>
+                                        ★★★★★
+                                    </span>
+                                    <span className={styles.comments}>
+                                        {item.comments_count}
+                                    </span>
+                                </div>
+                            </div>
+                        })
+                        :
+                        <div className={styles.unknown}>
                             <div className={styles.image_wrapper}>
-                                <Image src={item.avatar} width={200} height={200} alt='Фото барбера' />
+                                <Image src={sadSmile} width={200} height={200} alt='Фото барбера' />
                             </div>
                             <span className={styles.name}>
-                                {item.name}
+                                Ошибка
                             </span>
                             <span className={styles.role}>
-                                {item.specialization}
+                                На выбранные услуги не нашлось мастеров
                             </span>
                             <div className={styles.rating}>
                                 <span className={styles.stars}>
-                                    ★★★★★
-                                </span>
-                                <span className={styles.comments}>
-                                    {item.comments_count}
+                                    Попробуйте выбрать другие
                                 </span>
                             </div>
                         </div>
-                    })
-                }
-            </div>
+                    }
+                </div>
 
-        </main>
+            </main>
     );
 }
 

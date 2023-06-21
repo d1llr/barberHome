@@ -5,15 +5,14 @@ import { useAppSelector } from '@/redux/store';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = 'ctxn2pt2jwz2ushknuds'
-  const { staff_id } = req.query; 
-
-  axios.get('https://api.yclients.com/api/v1/book_dates/256926', {
+  const { staff_id, departmentID } = req.query;
+  axios.get(`https://api.yclients.com/api/v1/book_dates/${departmentID}`, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/vnd.yclients.v2+json'
     },
-    params:{
-        staff_id:staff_id
+    params: {
+      staff_id: staff_id
     }
   })
     .then((response) => {

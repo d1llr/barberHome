@@ -2,27 +2,44 @@ import { useState } from 'react';
 
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { categoryType } from '@/components/serviceRegistration/Service';
 
-export interface CartState {
-    services: Array<number>,
-    barber: number,
-    date: string,
-    dateTime: string,
-    result: Array<string>
+interface Idepartment {
+    id: number,
+    address: string
 }
 
+export interface CartState {
+    department:Idepartment,
+    services: Array<number>,
+    categoryType:categoryType,
+    barber: number,
+    date: string,
+    dateTime: string
+}
+
+
+
 const initialState = {
+    department:{
+        id: 0,
+        address: ''
+    },
     services: [],
+    categoryType: categoryType.services,
     barber: 0,
     date: '',
     dateTime: '',
-    result: ['']
 } as CartState
 
 const cartSlice = createSlice({
     name: 'cartSlice',
     initialState,
     reducers: {
+        setDepartment(state, action: PayloadAction<Idepartment>){
+            state.department.id = action.payload.id
+            state.department.address = action.payload.address
+        },
         PullService(state, action: PayloadAction<number>) {
             state.services.push(action.payload)
         },
@@ -33,6 +50,10 @@ const cartSlice = createSlice({
                 state.date = ''
                 state.dateTime = ''
             }
+        },
+
+        setCurrentCategory(state, action: PayloadAction<categoryType>){
+            state.categoryType = action.payload
         },
         RemoveAllService(state) {
             state.services = []
@@ -91,11 +112,13 @@ export const {
     RemoveService,
     PullBarber,
     RemoveBarber,
+    setCurrentCategory,
     RemoveAllService,
     setDates,
     removeDates,
     setDateTime,
-    removeDateTime
+    removeDateTime,
+    setDepartment
 } = cartSlice.actions
 
 export default cartSlice.reducer
