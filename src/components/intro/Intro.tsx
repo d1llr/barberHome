@@ -9,7 +9,7 @@ const Intro = () => {
     return (
         <main className={styles.main}>
             <div className={styles.image_wrapper}>
-                <Image src={logo} width={350} height={350} alt='Logotype'/>
+                <Image src={logo} width={250} height={250} alt='Logotype'/>
                 <span>— стрижем и бреем —</span>
             </div>
 

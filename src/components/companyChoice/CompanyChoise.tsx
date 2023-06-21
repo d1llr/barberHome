@@ -25,7 +25,7 @@ const CompanyChoise = () => {
                 data.map((item: ICompany, index:number) => {
                     return <div className={styles.department} key={index}>
                         <div className={styles.image_wrapper}>
-                            <Image src={item.logo} alt='logo' width={230} height={230} />
+                            <Image src={item.logo} alt='logo' width={150} height={150} />
                         </div>
                         <span className={styles.adress}>
                             {item.address}
