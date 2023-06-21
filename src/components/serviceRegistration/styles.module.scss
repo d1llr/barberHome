@@ -211,7 +211,7 @@
                 padding: 1.3em;
                 cursor: pointer;
                 position: relative;
-                background: #00000088;
+                backdrop-filter: blur(10px);
                 width: 45%;
                 border-radius: 20px;
                 display: -webkit-box;
