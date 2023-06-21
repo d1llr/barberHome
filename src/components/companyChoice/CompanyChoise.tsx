@@ -40,12 +40,10 @@ const CompanyChoise = () => {
                         </span>
                     </div>
                 })
-
-
             }
 
-
             {isError && <button className={styles.next_stage}><span>Ошибка</span></button>}
+            
             {
                 department.id != 0 ?
                 <button className={styles.next_stage} onClick={() => dispatch(nextStage(1))}><span>Перейти к заказу</span></button>

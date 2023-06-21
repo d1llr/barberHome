@@ -11,9 +11,11 @@ export interface Root {
     datetime: string
 }
 export function Times({ barber, date }: TimesApi): JSX.Element {
-    const { data, isLoading, isError, isSuccess, isFetching } = useGetTimesQuery({ barber, date })
-    const dispatch = useAppDispatch()
+
     const cart = useAppSelector(state => state.cartSlice)
+    const { data, isLoading, isError, isSuccess, isFetching } = useGetTimesQuery({ barber, date, departmentID: cart.department.id })
+    const dispatch = useAppDispatch()
+
 
     const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         if (event.currentTarget.dataset.datetime) {

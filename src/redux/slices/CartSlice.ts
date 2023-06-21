@@ -68,14 +68,12 @@ const cartSlice = createSlice({
         },
         RemoveBarber(state) {
             state.barber = 0
+            state.date = ''
+            state.dateTime = ''
         },
 
         setDates(state, action: PayloadAction<string>) {
             state.date = action.payload
-        },
-
-        removeDates(state) {
-            state.date = ''
         },
 
         setDateTime(state, action: PayloadAction<string>) {
@@ -115,7 +113,6 @@ export const {
     setCurrentCategory,
     RemoveAllService,
     setDates,
-    removeDates,
     setDateTime,
     removeDateTime,
     setDepartment

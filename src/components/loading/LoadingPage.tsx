@@ -3,7 +3,7 @@ import s from './styles.module.scss'
 
 const LoadingPage = () => {
     return ( 
-        <main>
+        <main className={s.main}>
             <div className={s.lds_dual_ring}>
 
             </div>

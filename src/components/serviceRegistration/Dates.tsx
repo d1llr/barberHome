@@ -6,7 +6,7 @@ import Image from "next/image";
 import calendarImage from '../../../public/img/calendar.png'
 import { TimesApi, getTimes, useGetTimesQuery } from "@/redux/api/getTimes";
 import { Times } from "./times/Times";
-import { removeDateTime, removeDates, setDates } from "@/redux/slices/CartSlice";
+import { removeDateTime, setDates } from "@/redux/slices/CartSlice";
 import LoadingPage from "../loading/LoadingPage";
 import { setDate } from "date-fns";
 
