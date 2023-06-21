@@ -45,8 +45,6 @@ const CompanyChoise = () => {
             }
 
 
-
-            {isLoading && <button className={styles.next_stage}><span>Загрузка</span></button>}
             {isError && <button className={styles.next_stage}><span>Ошибка</span></button>}
             {
                 department.id != 0 ?
