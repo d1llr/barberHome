@@ -22,8 +22,8 @@ const CompanyChoise = () => {
             {isLoading && <LoadingPage />}
 
             {isSuccess &&
-                data.map((item: ICompany) => {
-                    return <div className={styles.department}>
+                data.map((item: ICompany, index:number) => {
+                    return <div className={styles.department} key={index}>
                         <div className={styles.image_wrapper}>
                             <Image src={item.logo} alt='logo' width={230} height={230} />
                         </div>
