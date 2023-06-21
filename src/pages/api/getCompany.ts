@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = 'ctxn2pt2jwz2ushknuds'
-  axios.get('https://api.yclients.com/api/v1/company/256926/', {
+  axios.get('https://api.yclients.com/api/v1/companies?group_id=237930', {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/vnd.yclients.v2+json'

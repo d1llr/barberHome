@@ -56,9 +56,6 @@ const Dates = () => {
     return (
         isLoading ? <LoadingPage /> :
             <main className={styles.dates_container}>
-                <h2>
-                    Выбор даты
-                </h2>
                 <p>
                     Сегодня {today.getDate()} {months[today.getMonth()]} | {days[today.getDay()]}
                 </p>

@@ -41,9 +41,6 @@ const Barber = () => {
     return (
         isLoading ? <LoadingPage /> :
         <main className={styles.barber_container}>
-            <h2>
-                Выбор мастера
-            </h2>
             <div className={styles.barber_wrapper}>
                 {isSuccess &&
                     data.map((item: Ibarber) => {

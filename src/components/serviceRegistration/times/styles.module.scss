@@ -1,8 +1,8 @@
 .ul{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-end;
+    justify-content: flex-start !important;
     flex-wrap: wrap;
     .li{
         width: 50px;
