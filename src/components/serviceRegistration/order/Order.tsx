@@ -88,6 +88,22 @@ const Form = () => {
         </div>
         <button type='submit' className={s.button}> Отправить </button>
       </form>
+      <hr></hr>
+      <div className={s.order_container2}>
+        <div>
+          <h2>Отделение</h2>
+          <span className={s.value}>{cart.department.address}</span>
+        </div>
+        <div>
+          <h2>Услуги</h2>
+          <ul>
+            {cart.services.map(item=>{
+              return <li>{item.name} <span>X</span></li>
+            })}
+          </ul>
+        </div>
+
+      </div>
     </main>
   );
 };
