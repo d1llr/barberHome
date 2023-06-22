@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&display=swap');
 
 .main {
     flex-grow: 0;
@@ -16,7 +15,8 @@
         span{
             color: white;
             font-size: 30px;
-            font-family: 'Lobster', cursive;
+            font-family: 'Playfair Display SC', serif;
+            font-weight: 700;
         }
     }
     .next_stage {
