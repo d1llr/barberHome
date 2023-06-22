@@ -9,11 +9,21 @@ interface Idepartment {
     address: string
 }
 
+interface IService {
+    id: number,
+    name: string
+}
+
+interface IBarber {
+    id: number,
+    name: string
+}
+
 export interface CartState {
-    department:Idepartment,
-    services: Array<number>,
-    categoryType:categoryType,
-    barber: number,
+    department: Idepartment,
+    services: Array<IService>,
+    categoryType: categoryType,
+    barber: IBarber,
     date: string,
     dateTime: string
 }
@@ -21,13 +31,21 @@ export interface CartState {
 
 
 const initialState = {
-    department:{
+    department: {
         id: 0,
         address: ''
     },
-    services: [],
+    services: [
+        {
+            id: 0,
+            name: ''
+        }
+    ],
     categoryType: categoryType.services,
-    barber: 0,
+    barber: {
+        id: 0,
+        name: ''
+    },
     date: '',
     dateTime: '',
 } as CartState
@@ -36,48 +54,64 @@ const cartSlice = createSlice({
     name: 'cartSlice',
     initialState,
     reducers: {
-        setDepartment(state, action: PayloadAction<Idepartment>){
+        setDepartment(state, action: PayloadAction<Idepartment>) {
             state.department.id = action.payload.id
             state.department.address = action.payload.address
 
 
             //обнуление всех категорий
-            state.barber = 0
+            state.barber = {
+                id: 0,
+                name: ''
+            }
             state.categoryType = categoryType.services
             state.date = ''
             state.dateTime = ''
             state.services = []
         },
-        PullService(state, action: PayloadAction<number>) {
+        PullService(state, action: PayloadAction<IService>) {
             state.services.push(action.payload)
-        },
-        RemoveService(state, action: PayloadAction<number>) {
-            state.services = state.services.filter(item => item != action.payload)
-            if (state.services.length == 0) {
-                state.barber = 0
-                state.date = ''
-                state.dateTime = ''
+            state.barber = {
+                id: 0,
+                name: ''
             }
+            state.date = ''
+            state.dateTime = ''
+        },
+        RemoveService(state, action: PayloadAction<IService>) {
+            state.services = state.services.filter(item => item.id != action.payload.id)
+            state.barber = {
+                id: 0,
+                name: ''
+            }
+            state.date = ''
+            state.dateTime = ''
         },
 
-        setCurrentCategory(state, action: PayloadAction<categoryType>){
+        setCurrentCategory(state, action: PayloadAction<categoryType>) {
             state.categoryType = action.payload
         },
         RemoveAllService(state) {
             state.services = []
             if (state.services.length == 0) {
-                state.barber = 0
+                state.barber = {
+                    id: 0,
+                    name: ''
+                }
                 state.date = ''
                 state.dateTime = ''
             }
         },
-        PullBarber(state, action: PayloadAction<number>) {
+        PullBarber(state, action: PayloadAction<IBarber>) {
             state.date = ''
             state.dateTime = ''
             state.barber = action.payload
         },
         RemoveBarber(state) {
-            state.barber = 0
+            state.barber = {
+                id: 0,
+                name: ''
+            }
             state.date = ''
             state.dateTime = ''
         },
@@ -108,7 +142,10 @@ const cartSlice = createSlice({
             if (state.services.length == 0) {
                 console.log('-barber');
                 state.dateTime = ''
-                state.barber = 0
+                state.barber = {
+                    id: 0,
+                    name: ''
+                }
                 state.date = ''
             }
         })

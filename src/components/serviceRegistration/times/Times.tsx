@@ -3,6 +3,7 @@ import s from './styles.module.scss'
 import LoadingPage from "@/components/loading/LoadingPage"
 import { useAppDispatch, useAppSelector } from "@/redux/store"
 import { setDateTime } from "@/redux/slices/CartSlice"
+import ErrorPage from "@/components/error/ErrorPage"
 
 export interface Root {
     time: string
@@ -28,17 +29,22 @@ export function Times({ barber, date }: TimesApi): JSX.Element {
 
     return (
         isLoading ? <LoadingPage /> :
-            <ul className={s.ul}>
-                {isSuccess && data.map((item: Root, index: number) => {
-                    return <li
-                        key={index}
-                        className={cart.dateTime == item.datetime ? s.li_checked : s.li}
-                        data-datetime={item.datetime}
-                        onClick={(e) => handleClick(e)}
-                    >
-                        {item.time}
-                    </li>
-                })}
-            </ul>
+            isSuccess ?
+                <ul className={s.ul}>
+                    {data.length != 0 ?
+                        data.map((item: Root, index: number) => {
+                            return <li
+                                key={index}
+                                className={cart.dateTime == item.datetime ? s.li_checked : s.li}
+                                data-datetime={item.datetime}
+                                onClick={(e) => handleClick(e)}
+                            >
+                                {item.time}
+                            </li>
+                        }) :
+                        <ErrorPage title="Ошибка, на данную дату времени нет" />
+                    }
+                </ul> :
+                <ErrorPage title="Ошибка при выводе времени" />
     )
 }

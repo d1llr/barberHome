@@ -7,6 +7,7 @@ import Service from "./services/Service";
 import Barber from "./Barber";
 import Dates from "./Dates"
 import { setStage, prevStage, nextStage } from "@/redux/slices/orderStageSlice";
+import Order from "./order/Order";
 
 interface ICategory {
     api_id: number,
@@ -61,13 +62,12 @@ const ServiceRegistration = () => {
         switch (stage) {
             case 1:
                 return <Service />
-                break;
             case 2:
                 return <Barber />
-                break;
             case 3:
                 return <Dates />
-                break;
+            case 4:
+                return <Order />
             default:
                 break;
         }
@@ -85,12 +85,12 @@ const ServiceRegistration = () => {
                 break;
             case 3:
                 cart.services.length == 0 ? dispatch(setStage(1)) :
-                    cart.barber == 0 ? dispatch(setStage(2)) :
+                    cart.barber.id == 0 ? dispatch(setStage(2)) :
                         dispatch(setStage(3))
                 break;
             case 4:
                 cart.services.length == 0 ? dispatch(setStage(1)) :
-                    cart.barber == 0 ? dispatch(setStage(2)) :
+                    cart.barber.id == 0 ? dispatch(setStage(2)) :
                         cart.dateTime == '' ? dispatch(setStage(3)) :
                             dispatch(setStage(4))
                 break;
@@ -118,7 +118,7 @@ const ServiceRegistration = () => {
                 </div>
                 <div className={styles.line}></div>
                 <div
-                    className={stage == 3 ? styles.item_current : cart.barber != 0 ? styles.item_available : styles.item_unavailable}
+                    className={stage == 3 ? styles.item_current : cart.barber.id != 0 ? styles.item_available : styles.item_unavailable}
                     onClick={() => handleNextStage(3)}>
                     <span>3</span>
                 </div>
@@ -145,7 +145,7 @@ const ServiceRegistration = () => {
                         </button>
                         :
                         stage == 2 ?
-                            cart.barber != 0 &&
+                            cart.barber.id != 0 &&
                             <button onClick={() => dispatch(nextStage())}>
                                 Далее
                             </button>
