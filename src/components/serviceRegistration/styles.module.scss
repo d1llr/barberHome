@@ -117,7 +117,7 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 align-items: center;
-                
+
                 justify-content: space-between;
                 .block {
                     position: relative;
@@ -335,7 +335,7 @@
             position: absolute;
             width: 300px;
             right: 20px;
-            
+
             height: 300px;
             border-radius: 20px;
             padding: 20px;
@@ -389,15 +389,15 @@
             }
         }
     }
-    
-    .order_container{
+
+    .order_container {
         @extend .services_container;
-        h2{
-            font-family: 'Playfair Display SC', serif;
+        h2 {
+            font-family: "Playfair Display SC", serif;
             width: 100%;
             text-align: center;
         }
-        form{
+        form {
             width: 100%;
             display: flex;
             margin: auto;
@@ -405,39 +405,39 @@
             justify-content: flex-start;
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: .2em;
-            div{
+            padding: 0.2em;
+            div {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                margin: .4em 0;
+                margin: 0.4em 0;
                 border-bottom: 1px solid #fff;
                 padding: 0.3em;
-                label{
+                label {
                     font-size: 14px;
                     color: #fff;
                     width: 150px;
                 }
-                input{
-                    padding: .4em;
+                input {
+                    padding: 0.4em;
                     outline: none;
                     border: 1px solid #494949;
-                    border-radius: .3em;
+                    border-radius: 0.3em;
                     color: rgb(216, 216, 214);
                     width: 250px;
                     font-size: 12px;
                     background: none;
                     margin-left: 1em;
                 }
-                input::placeholder{
+                input::placeholder {
                     color: #525050;
                 }
             }
-            .button{
+            .button {
                 width: 50%;
                 margin: 1em auto;
-                
+
                 border-radius: 20px;
                 border: 1px solid #fff;
                 font-size: 20px;
@@ -445,15 +445,15 @@
                 background: none;
             }
         }
-        hr{
+        hr {
             width: 100%;
             margin: 1em 0;
         }
-        .order_container2{
+        .order_container2 {
             display: flex;
             flex-direction: column;
             align-items: center;
-            div{
+            div {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -463,21 +463,31 @@
                 backdrop-filter: blur(10px);
                 padding: 0.4em;
                 border-radius: 20px;
-                .value{
-                    color: #fff;
+                .value {
+                    margin: 0.4em;
+                    padding: 0.5em 1em;
+                    border: 1px solid #444444;
+                    font-size: 12px;
+                    list-style: none;
+                    border-radius: 20px;
+                    display: flex;
+                    color: #ffffff;
+                    text-align: center;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
                 }
-                h2{
+                h2 {
                     font-size: 20px;
                     text-align: center;
                 }
-                ul{
+                ul {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     flex-wrap: wrap;
-                    li{
+                    li {
                         margin: 0.4em;
-                        
                         padding: 0.5em;
                         border: 1px solid #444444;
                         font-size: 12px;
@@ -489,7 +499,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: space-between;
-                        span{
+                        span {
                             font-size: 14px;
                             background-color: red;
                             color: #fff;
@@ -501,7 +511,16 @@
                             border-radius: 30px;
                         }
                     }
-                
+                }
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    input {
+                        @extend .value;
+                        background: none;
+                    }
                 }
             }
         }

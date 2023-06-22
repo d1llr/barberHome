@@ -97,12 +97,27 @@ const Form = () => {
         <div>
           <h2>Услуги</h2>
           <ul>
-            {cart.services.map(item=>{
+            {cart.services.map(item => {
               return <li key={item.id}>{item.name} <span>X</span></li>
             })}
           </ul>
         </div>
-
+        <div>
+          <h2>Мастер</h2>
+          <span className={s.value}>{cart.barber.name}</span>
+        </div>
+        <div>
+          <h2>Дата и время</h2>
+          <span className={s.value}>{format(new Date(cart.dateTime), "dd MMMM yyyy, HH:mm", { locale: ruLocale })}</span>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder='Ваше имя' {...register("name")} required />
+            <InputMask mask="+7 (999) 999-99-99" maskChar="_" type="text" required {...register("phone", { pattern: phoneRegExp })} placeholder='Введите номер телефона' />
+            <input type="text" {...register("email", validateEmail)} required placeholder='Введите ваш email' />
+            <input type="text" {...register("comment")} placeholder='Комментарий'/>
+          </form>
+        </div>
       </div>
     </main>
   );
