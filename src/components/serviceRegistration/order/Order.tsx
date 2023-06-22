@@ -98,7 +98,7 @@ const Form = () => {
           <h2>Услуги</h2>
           <ul>
             {cart.services.map(item=>{
-              return <li>{item.name} <span>X</span></li>
+              return <li key={item.id}>{item.name} <span>X</span></li>
             })}
           </ul>
         </div>
