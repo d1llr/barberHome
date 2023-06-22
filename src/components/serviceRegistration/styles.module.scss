@@ -397,24 +397,24 @@
             text-align: center;
         }
         form{
-            width: 90%;
+            width: 100%;
             display: flex;
             margin: auto;
             flex-direction: column;
             justify-content: flex-start;
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 1em;
+            padding: .2em;
             div{
                 display: flex;
                 flex-direction: row;
-                justify-content: space-around;
+                justify-content: space-between;
                 align-items: center;
                 margin: .4em 0;
                 border-bottom: 1px solid #fff;
                 padding: 0.3em;
                 label{
-                    font-size: 16px;
+                    font-size: 14px;
                     color: #fff;
                     width: 150px;
                 }
@@ -425,7 +425,7 @@
                     border-radius: .3em;
                     color: rgb(216, 216, 214);
                     width: 250px;
-                    font-size: 14px;
+                    font-size: 12px;
                     background: none;
                     margin-left: 1em;
                 }
