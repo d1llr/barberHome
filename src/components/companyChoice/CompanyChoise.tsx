@@ -30,7 +30,7 @@ const CompanyChoise = () => {
                         onClick={() => dispatch(setDepartment({id: item.id, address: item.address}))}
                     >
                         <div className={styles.image_wrapper}>
-                            <Image src={item.logo} alt='logo' width={150} height={150} />
+                            <Image src={item.logo} alt='logo' width={100} height={100} />
                         </div>
                         <span className={styles.adress}>
                             {item.address}

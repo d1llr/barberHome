@@ -1,9 +1,9 @@
 import { useGetServicesQuery } from '@/redux/api/getServicesApi'
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { PullService, RemoveAllService, RemoveService, setCurrentCategory } from '@/redux/slices/CartSlice'
 import React, { useEffect, useState } from 'react'
-import LoadingPage from '../loading/LoadingPage'
+import LoadingPage from '../../loading/LoadingPage'
 
 interface ICategory {
     api_id: number,
@@ -40,7 +40,7 @@ interface IService {
     weight: number
 }
 
-export enum categoryType { services, servicesPRO }
+export enum categoryType { services, servicesPRO = 'PRO', servicesTOP = 'ТОП-Барбер' }
 
 const Service: React.FC = () => {
 
@@ -91,11 +91,19 @@ const Service: React.FC = () => {
                         }}>
                         PRO услуги
                     </li>
+                    <li
+                        className={currentCategory == categoryType.servicesTOP ? styles.li_checked : styles.li}
+                        onClick={() => {
+                            dispatch(setCurrentCategory(categoryType.servicesTOP))
+                            dispatch(RemoveAllService())
+                        }}>
+                        TOP услуги
+                    </li>
                 </ul>
                 {isSuccess &&
                     data.category.map((category: ICategory, index: number) => {
                         if (currentCategory == categoryType.servicesPRO) {
-                            if (index % 2 != 0)
+                            if (category.title.indexOf(categoryType.servicesPRO) > 0)
                                 return <div className={styles.services_wrapper} key={index}>
                                     <h3>{category.title}</h3>
                                     <div className={styles.service}>
@@ -106,7 +114,7 @@ const Service: React.FC = () => {
                                                     onClick={(e) => handleClick(e)}
                                                     data-id={el.id}
                                                     key={el.id}
-                                                    >
+                                                >
                                                     <span className={styles.title}>{el.title}</span>
                                                     <span className={styles.price}>{el.price_min}₽</span>
                                                 </div>
@@ -114,8 +122,27 @@ const Service: React.FC = () => {
                                     </div>
                                 </div>
                         }
-                        else {
-                            if (index % 2 == 0)
+                        else if (currentCategory == categoryType.servicesTOP) {
+                            if (category.title.indexOf(categoryType.servicesTOP) > 0) {
+                                return <div className={styles.services_wrapper} key={index}>
+                                    <h3>{category.title}</h3>
+                                    <div className={styles.service}>
+                                        {data.services.map((el: IService) => {
+                                            if (el.category_id == category.id)
+                                                return <div
+                                                    className={checkedServices.includes(el.id) ? styles.block_checked : styles.block}
+                                                    onClick={(e) => handleClick(e)}
+                                                    data-id={el.id}>
+                                                    <span className={styles.title}>{el.title}</span>
+                                                    <span className={styles.price}>{el.price_min}₽</span>
+                                                </div>
+                                        })}
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else if (currentCategory == categoryType.services) {
+                            if ((category.title.indexOf(categoryType.servicesTOP) < 0) && (category.title.indexOf(categoryType.servicesPRO) < 0))
                                 return <div className={styles.services_wrapper} key={index}>
                                     <h3>{category.title}</h3>
                                     <div className={styles.service}>

@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { ReactHTMLElement, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { PullService, RemoveService } from "@/redux/slices/CartSlice";
-import Service from "./Service";
+import Service from "./services/Service";
 import Barber from "./Barber";
 import Dates from "./Dates"
 import { setStage, prevStage, nextStage } from "@/redux/slices/orderStageSlice";

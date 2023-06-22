@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { categoryType } from '@/components/serviceRegistration/Service';
+import { categoryType } from '@/components/serviceRegistration/services/Service';
 
 interface Idepartment {
     id: number,
@@ -39,6 +39,14 @@ const cartSlice = createSlice({
         setDepartment(state, action: PayloadAction<Idepartment>){
             state.department.id = action.payload.id
             state.department.address = action.payload.address
+
+
+            //обнуление всех категорий
+            state.barber = 0
+            state.categoryType = categoryType.services
+            state.date = ''
+            state.dateTime = ''
+            state.services = []
         },
         PullService(state, action: PayloadAction<number>) {
             state.services.push(action.payload)
@@ -64,6 +72,8 @@ const cartSlice = createSlice({
             }
         },
         PullBarber(state, action: PayloadAction<number>) {
+            state.date = ''
+            state.dateTime = ''
             state.barber = action.payload
         },
         RemoveBarber(state) {
