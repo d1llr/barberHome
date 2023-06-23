@@ -53,42 +53,46 @@ const Form = () => {
       <h2>Моя запись</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>Отделение:</label>
+          <label>Отделение</label>
           <input type="text" readOnly value={cart.department.address} {...register("department")} />
         </div>
         <div>
-          <label>Услуга:</label>
-          <input type="text" readOnly value={cart.services.map(item => item.name)} {...register("services")} />
+          <label>Услуга</label>
+          <ul>
+            {cart.services.map(item => {
+              return <li key={item.id}>{item.name} - {item.price}₽ <span>X</span></li>
+            })}
+          </ul>
         </div>
         <div>
-          <label>Мастер:</label>
+          <label>Мастер</label>
           <input type="text" readOnly value={cart.barber.name} {...register("staff_id")} />
         </div>
         <div>
-          <label>Дата, время:</label>
+          <label>Дата, время</label>
           <input type="text" readOnly value={format(new Date(cart.dateTime), "dd MMMM yyyy, HH:mm", { locale: ruLocale })} {...register("datetime")} />
         </div>
         <div>
-          <label>Комментарий:</label>
+          <label>Комментарий</label>
           <input type="text" {...register("comment")} />
         </div>
         <div>
-          <label>Ваше имя:</label>
+          <label>Ваше имя</label>
           <input type="text" {...register("name")} required />
         </div>
         <div>
-          <label>Номер телефона:</label>
+          <label>Номер телефона</label>
           <InputMask mask="+7 (999) 999-99-99" maskChar="_" type="text" required {...register("phone", { pattern: phoneRegExp })} placeholder='Введите номер телефона' />
           {errors.phone && errors.phone.type === "pattern" && <span>Введите корректный номер телефона</span>}
         </div>
         <div>
-          <label>Email:</label>
+          <label>Email</label>
           <input type="text" {...register("email", validateEmail)} required placeholder='Введите ваш email' />
           {errors.email && <span>{errors.email.message}</span>}
         </div>
         <button type='submit' className={s.button}> Отправить </button>
       </form>
-      <hr></hr>
+      {/* <hr></hr>
       <div className={s.order_container2}>
         <div>
           <h2>Отделение</h2>
@@ -115,10 +119,10 @@ const Form = () => {
             <input type="text" placeholder='Ваше имя' {...register("name")} required />
             <InputMask mask="+7 (999) 999-99-99" maskChar="_" type="text" required {...register("phone", { pattern: phoneRegExp })} placeholder='Введите номер телефона' />
             <input type="text" {...register("email", validateEmail)} required placeholder='Введите ваш email' />
-            <input type="text" {...register("comment")} placeholder='Комментарий'/>
+            <input type="text" {...register("comment")} placeholder='Комментарий' />
           </form>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };

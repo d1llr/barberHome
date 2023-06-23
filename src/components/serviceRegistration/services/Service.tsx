@@ -63,17 +63,19 @@ const Service: React.FC = () => {
 
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (event.currentTarget.dataset.id && event.currentTarget.dataset.title)
+        if (event.currentTarget.dataset.id && event.currentTarget.dataset.title && event.currentTarget.dataset.price)
             if (checkedServices.includes(Number(event.currentTarget.dataset.id))) {
                 dispatch(RemoveService({
                     id: Number(event.currentTarget.dataset.id),
-                    name: event.currentTarget.dataset.title
+                    name: event.currentTarget.dataset.title,
+                    price: Number(event.currentTarget.dataset.price)
                 }))
             }
             else {
                 dispatch(PullService({
                     id: Number(event.currentTarget.dataset.id),
-                    name: event.currentTarget.dataset.title
+                    name: event.currentTarget.dataset.title,
+                    price: Number(event.currentTarget.dataset.price)
                 }))
             }
     }
@@ -125,6 +127,7 @@ const Service: React.FC = () => {
                                                                 onClick={(e) => handleClick(e)}
                                                                 data-id={el.id}
                                                                 data-title={el.title}
+                                                                data-price={el.price_min}
                                                                 key={el.id}
                                                             >
                                                                 <span className={styles.title}>{el.title}</span>
@@ -147,6 +150,7 @@ const Service: React.FC = () => {
                                                                 onClick={(e) => handleClick(e)}
                                                                 data-id={el.id}
                                                                 data-title={el.title}
+                                                                data-price={el.price_min}
                                                                 key={el.id}>
                                                                 <span className={styles.title}>{el.title}</span>
                                                                 <span className={styles.price}>{el.price_min}₽</span>
@@ -169,6 +173,7 @@ const Service: React.FC = () => {
                                                                 onClick={(e) => handleClick(e)}
                                                                 data-id={el.id}
                                                                 data-title={el.title}
+                                                                data-price={el.price_min}
                                                                 key={el.id}
                                                             >
                                                                 <span className={styles.title}>{el.title}</span>

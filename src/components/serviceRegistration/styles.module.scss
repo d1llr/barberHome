@@ -408,16 +408,17 @@
             padding: 0.2em;
             div {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
                 margin: 0.4em 0;
-                border-bottom: 1px solid #fff;
-                padding: 0.3em;
+                border-radius: 20px;
+                border: 1px solid #fff;
+                padding: 0.5em;
                 label {
                     font-size: 14px;
                     color: #fff;
-                    width: 150px;
+                    // width: 150px;
                 }
                 input {
                     padding: 0.4em;
@@ -432,6 +433,38 @@
                 }
                 input::placeholder {
                     color: #525050;
+                }
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    li {
+                        margin: 0.4em;
+                        padding: 0.5em;
+                        border: 1px solid #444444;
+                        font-size: 12px;
+                        list-style: none;
+                        width: 250px;
+                        border-radius: 20px;
+                        display: flex;
+                        color: #ffffff;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        span {
+                            font-size: 14px;
+                            background-color: red;
+                            color: #fff;
+                            width: 30px;
+                            margin-left: 1em;
+                            height: 30px;
+                            line-height: 30px;
+                            text-align: center;
+                            border-radius: 30px;
+                        }
+                    }
                 }
             }
             .button {

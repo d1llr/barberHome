@@ -11,7 +11,8 @@ interface Idepartment {
 
 interface IService {
     id: number,
-    name: string
+    name: string,
+    price: number
 }
 
 interface IBarber {
@@ -38,7 +39,8 @@ const initialState = {
     services: [
         {
             id: 0,
-            name: ''
+            name: '',
+            price: 0
         }
     ],
     categoryType: categoryType.services,
