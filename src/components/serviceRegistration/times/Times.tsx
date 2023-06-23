@@ -4,6 +4,7 @@ import LoadingPage from "@/components/loading/LoadingPage"
 import { useAppDispatch, useAppSelector } from "@/redux/store"
 import { setDateTime } from "@/redux/slices/CartSlice"
 import ErrorPage from "@/components/error/ErrorPage"
+import { memo } from "react"
 
 export interface Root {
     time: string
@@ -11,10 +12,10 @@ export interface Root {
     sum_length: number
     datetime: string
 }
-export function Times({ barber, date }: TimesApi): JSX.Element {
+function Times({ barber }: { barber: number }): JSX.Element {
 
     const cart = useAppSelector(state => state.cartSlice)
-    const { data, isLoading, isError, isSuccess, isFetching } = useGetTimesQuery({ barber, date, departmentID: cart.department.id })
+    const { data, isLoading, isError, isSuccess, isFetching } = useGetTimesQuery({ barber, date: cart.date, departmentID: cart.department.id })
     const dispatch = useAppDispatch()
 
 
@@ -48,3 +49,5 @@ export function Times({ barber, date }: TimesApi): JSX.Element {
                 <ErrorPage title="Ошибка при выводе времени" />
     )
 }
+
+export default memo(Times)

@@ -5,7 +5,7 @@ import { memo, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import calendarImage from '../../../public/img/calendar.png'
 import { TimesApi, getTimes, useGetTimesQuery } from "@/redux/api/getTimes";
-import { Times } from "./times/Times";
+import Times from "./times/Times";
 import { removeDateTime, setDates } from "@/redux/slices/CartSlice";
 import LoadingPage from "../loading/LoadingPage";
 import { setDate } from "date-fns";
@@ -31,6 +31,10 @@ const Dates = () => {
         }
 
     }
+
+
+    console.log('render');
+    
 
     const setDataId = (day: number) => {
         let index = data.booking_days[today.getMonth() + 1].indexOf(day)
@@ -116,7 +120,7 @@ const Dates = () => {
                     }
 
                     <hr></hr>
-                    <Times barber={cart.barber.id} date={cart.date} />
+                    {cart.date != '' && <Times barber={cart.barber.id} />}
                 </main> :
                 <ErrorPage title="Ошибка" />
     );

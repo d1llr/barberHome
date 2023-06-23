@@ -1,12 +1,12 @@
 import { useGetServicesQuery } from '@/redux/api/getServicesApi'
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { PullBarber, PullService, RemoveBarber, RemoveService } from '@/redux/slices/CartSlice'
 import { useGetBarberQuery } from '@/redux/api/getBarber'
 import Image from 'next/image'
-import LoadingPage from '../loading/LoadingPage'
+import LoadingPage from '../../loading/LoadingPage'
 import sadSmile from '../../../public/img/sadsmile.png'
-import ErrorPage from '../error/ErrorPage'
+import ErrorPage from '../../error/ErrorPage'
 
 
 
@@ -45,6 +45,8 @@ const Barber = () => {
                 }))
             }
     }
+
+    console.log('render');
     return (
         isLoading ? <LoadingPage /> :
             isSuccess ? <main className={styles.barber_container}>

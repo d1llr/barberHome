@@ -4,7 +4,7 @@ import { ReactHTMLElement, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { PullService, RemoveService } from "@/redux/slices/CartSlice";
 import Service from "./services/Service";
-import Barber from "./Barber";
+import Barber from "./barber/Barber";
 import Dates from "./Dates"
 import { setStage, prevStage, nextStage } from "@/redux/slices/orderStageSlice";
 import Order from "./order/Order";
