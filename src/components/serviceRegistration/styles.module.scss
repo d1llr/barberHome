@@ -7,18 +7,21 @@
     align-items: center;
     padding: 0 0.5em;
     overflow-y: scroll;
-    ul {
+    .ul_category {
         display: flex;
         width: 100%;
         flex-direction: row;
+        backdrop-filter: blur(100px);
+        padding: 1em;
+        border-radius: 10px;
+        justify-content: space-between;
         .li {
             transition-duration: 0.1s;
             text-transform: uppercase;
             color: #aaa;
             text-align: center;
             position: relative;
-            width: 50%;
-            padding: 0 0 10px 0;
+            width: 30%;
             border-bottom: 4px solid transparent;
             list-style: none;
             cursor: pointer;
@@ -26,7 +29,7 @@
         .li_checked {
             @extend .li;
             color: #fff;
-            border-bottom: 4px solid #ffe100;
+            border-bottom: 2px solid #ffe100;
         }
     }
 
@@ -130,10 +133,10 @@
                     cursor: pointer;
                     background: #00000088;
                     width: 31%;
-                    height: 120px;
+                    min-height: 120px;
                     border-radius: 20px;
                     max-width: 150px;
-                    padding: 5px;
+                    padding: 10px;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -156,7 +159,7 @@
                     .title {
                         color: #fff;
                         text-align: center;
-                        font-size: 15px;
+                        font-size: 16px;
                     }
                     .price {
                         color: #ffe100;

@@ -85,7 +85,7 @@ const Service: React.FC = () => {
         isLoading ? <LoadingPage /> :
             isSuccess ?
                 <div className={styles.services_container}>
-                    <ul>
+                    <ul className={styles.ul_category}>
                         <li
                             className={currentCategory == categoryType.services ? styles.li_checked : styles.li}
                             onClick={() => {
