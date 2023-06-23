@@ -29,7 +29,7 @@
             border-bottom: 4px solid #ffe100;
         }
     }
-    
+
     .stages_container {
         width: 90%;
         display: flex;
@@ -78,9 +78,14 @@
     .buttons_container {
         display: flex;
         position: absolute;
-        bottom: 10px;
+        align-items: center;
+        justify-content: center;
+        bottom: 0px;
         left: 50%;
+        padding: 0.5em 0;
+        backdrop-filter: blur(10px);
         flex-direction: row;
+        width: 100%;    
         transform: translateX(-50%);
         z-index: 999;
         button {
