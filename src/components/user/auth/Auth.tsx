@@ -163,7 +163,7 @@ const Auth = () => {
                                     pattern: phoneRegExp
                                 })}
                                 className={errors.phone && s.error}
-                                onEnded={(e) => e.currentTarget.classList.remove(s.error)}
+                                onFocus={(e) => e.currentTarget.classList.remove(s.error)}
                             />
                         </div>
                         <button type='submit' className={s.button}>Отправить</button>
