@@ -112,7 +112,7 @@ const Form = () => {
         </div>
         <div>
           <label>Ваше имя</label>
-          <input type="text" {...register("name")} required className={errors.name && s.error} onEnded={(e) => e.currentTarget.classList.remove(s.error)} />
+          <input type="text" {...register("name")} required className={errors.name && s.error} onFocus={(e) => e.currentTarget.classList.remove(s.error)} />
 
         </div>
         <div>
@@ -126,7 +126,7 @@ const Form = () => {
             })}
             placeholder='Введите номер телефона'
             className={errors.phone && s.error}
-            onEnded={(e) => e.currentTarget.classList.remove(s.error)}
+            onFocus={(e) => e.currentTarget.classList.remove(s.error)}
           />
         </div>
         <div>
@@ -137,7 +137,7 @@ const Form = () => {
             required
             placeholder='Введите ваш email'
             className={errors.email && s.error}
-            onEnded={(e) => e.currentTarget.classList.remove(s.error)}
+            onFocus={(e) => e.currentTarget.classList.remove(s.error)}
           />
         </div>
         <div>
