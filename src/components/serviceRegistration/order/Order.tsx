@@ -1,9 +1,14 @@
-import { useAppSelector } from '@/redux/store';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
 import s from '../styles.module.scss'
 import { format } from 'date-fns';
 import { RegisterOptions, useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import ruLocale from "date-fns/locale/ru";
+import { IService, RemoveServiceFromOrderPage } from '@/redux/slices/CartSlice';
+import Modal from 'react-modal'
+import { useState } from 'react';
+import ModalWindow from './Modal/ModalWindow';
+import { openModal } from '@/redux/slices/ModalSlice';
 
 
 
@@ -26,15 +31,27 @@ const Form = () => {
   } = useForm<FormValues>();
 
 
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const cart = useAppSelector(state => state.cartSlice)
+  const dispatch = useAppDispatch()
 
   const onSubmit = (data: FormValues) => {
+
     data.department = cart.department.id.toString()
     data.services = cart.services.map(item => item.id)
     data.staff_id = cart.barber.id
     data.datetime = cart.dateTime
+    setIsOpen(true)
+    dispatch(openModal({ phone: data.phone, name: data.name, isOpen: true }))
+    data.phone = data.phone.replace(/[+()-\s]+/g, "");
     console.log(data);
+    setIsOpen(true)
+    dispatch(openModal({ phone: data.phone, name: data.name, isOpen: true }))
   };
+
+  const codeSubmit = (data: FormValues) => {
+
+  }
 
   const validateEmail: RegisterOptions = {
     required: true,
@@ -43,6 +60,14 @@ const Form = () => {
       return !!value.match(pattern) || "Неверный формат email";
     },
   };
+
+
+  const handleClick = (event: IService) => {
+    if (event) {
+      dispatch(RemoveServiceFromOrderPage(event))
+    }
+  }
+
 
   const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
 
@@ -60,7 +85,20 @@ const Form = () => {
           <label>Услуга</label>
           <ul>
             {cart.services.map(item => {
-              return <li key={item.id}>{item.name} - {item.price}₽ <span>X</span></li>
+              return <li key={item.id}>
+                <span className={s.name}>{item.name}</span>
+                <span className={s.price}>{item.price}₽</span>
+                <span
+                  className={s.close}
+                  data-id={item.id}
+                  onClick={() => handleClick({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price
+                  })}
+                >&#10006;
+                </span>
+              </li>
             })}
           </ul>
         </div>
@@ -73,58 +111,45 @@ const Form = () => {
           <input type="text" readOnly value={format(new Date(cart.dateTime), "dd MMMM yyyy, HH:mm", { locale: ruLocale })} {...register("datetime")} />
         </div>
         <div>
-          <label>Комментарий</label>
-          <input type="text" {...register("comment")} />
-        </div>
-        <div>
           <label>Ваше имя</label>
-          <input type="text" {...register("name")} required />
+          <input type="text" {...register("name")} required className={errors.name && s.error} onEnded={(e) => e.currentTarget.classList.remove(s.error)} />
+
         </div>
         <div>
           <label>Номер телефона</label>
-          <InputMask mask="+7 (999) 999-99-99" maskChar="_" type="text" required {...register("phone", { pattern: phoneRegExp })} placeholder='Введите номер телефона' />
-          {errors.phone && errors.phone.type === "pattern" && <span>Введите корректный номер телефона</span>}
+          <InputMask
+            mask="+7 (999) 999-99-99"
+            maskChar="_" type="text"
+            required
+            {...register("phone", {
+              pattern: phoneRegExp
+            })}
+            placeholder='Введите номер телефона'
+            className={errors.phone && s.error}
+            onEnded={(e) => e.currentTarget.classList.remove(s.error)}
+          />
         </div>
         <div>
           <label>Email</label>
-          <input type="text" {...register("email", validateEmail)} required placeholder='Введите ваш email' />
-          {errors.email && <span>{errors.email.message}</span>}
+          <input
+            type="text"
+            {...register("email", validateEmail)}
+            required
+            placeholder='Введите ваш email'
+            className={errors.email && s.error}
+            onEnded={(e) => e.currentTarget.classList.remove(s.error)}
+          />
+        </div>
+        <div>
+          <label>Комментарий</label>
+          <input type="text" {...register("comment")} />
         </div>
         <button type='submit' className={s.button}> Отправить </button>
       </form>
-      {/* <hr></hr>
-      <div className={s.order_container2}>
-        <div>
-          <h2>Отделение</h2>
-          <span className={s.value}>{cart.department.address}</span>
-        </div>
-        <div>
-          <h2>Услуги</h2>
-          <ul>
-            {cart.services.map(item => {
-              return <li key={item.id}>{item.name} <span>X</span></li>
-            })}
-          </ul>
-        </div>
-        <div>
-          <h2>Мастер</h2>
-          <span className={s.value}>{cart.barber.name}</span>
-        </div>
-        <div>
-          <h2>Дата и время</h2>
-          <span className={s.value}>{format(new Date(cart.dateTime), "dd MMMM yyyy, HH:mm", { locale: ruLocale })}</span>
-        </div>
-        <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder='Ваше имя' {...register("name")} required />
-            <InputMask mask="+7 (999) 999-99-99" maskChar="_" type="text" required {...register("phone", { pattern: phoneRegExp })} placeholder='Введите номер телефона' />
-            <input type="text" {...register("email", validateEmail)} required placeholder='Введите ваш email' />
-            <input type="text" {...register("comment")} placeholder='Комментарий' />
-          </form>
-        </div>
-      </div> */}
+      {isOpen && <ModalWindow />}
     </main>
   );
 };
 
 export default Form;
+

@@ -1,5 +1,6 @@
+import UserModalSlice, { UserModal } from './slices/UserModalSlice';
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
-import { getBarber} from './api/getBarber'
+import { getBarber } from './api/getBarber'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { createWrapper } from 'next-redux-wrapper';
 import StageSlice from './slices/StageSlice';
@@ -10,6 +11,11 @@ import orderStageSlice from './slices/orderStageSlice';
 import { getDates } from './api/getDates';
 import { getTimes } from './api/getTimes';
 import { getTime } from 'date-fns';
+import ModalSlice from './slices/ModalSlice';
+import { sendCode } from './api/sendCode';
+import UserSlice from './slices/UserSlice';
+import { UserAuth } from './api/UserAuth';
+import { getUserRecords } from './api/getUserRecords';
 
 
 
@@ -21,12 +27,26 @@ const makeStore = () =>
       [getServices.reducerPath]: getServices.reducer,
       [getDates.reducerPath]: getDates.reducer,
       [getTimes.reducerPath]: getTimes.reducer,
+      [sendCode.reducerPath]: sendCode.reducer,
+      [UserAuth.reducerPath]: UserAuth.reducer,
+      [getUserRecords.reducerPath]: getUserRecords.reducer,
       stageSlice: StageSlice,
       cartSlice: CartSlice,
-      orderStageSlice: orderStageSlice
+      ModalSlice: ModalSlice,
+      orderStageSlice: orderStageSlice,
+      UserModal: UserModalSlice,
+      UserSlice: UserSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(getBarber.middleware, getCompany.middleware, getServices.middleware, getDates.middleware, getTimes.middleware),
+      getDefaultMiddleware().concat(
+        getBarber.middleware, 
+        getCompany.middleware, 
+        getServices.middleware, 
+        getDates.middleware, 
+        getTimes.middleware, 
+        sendCode.middleware, 
+        UserAuth.middleware, 
+        getUserRecords.middleware),
   });
 
 export const store = makeStore()

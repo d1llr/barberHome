@@ -88,7 +88,7 @@
         padding: 0.5em 0;
         backdrop-filter: blur(1000px);
         flex-direction: row;
-        width: 100%;    
+        width: 100%;
         transform: translateX(-50%);
         z-index: 999;
         button {
@@ -299,6 +299,7 @@
 
     .dates_container {
         @extend .services_container;
+        flex-direction: row !important;
         h2 {
             margin-bottom: 0.5em;
         }
@@ -306,97 +307,128 @@
             font-size: 20px;
             color: #fff;
         }
-        ul {
+        .dates_wrapper {
             display: flex;
             flex-direction: row;
-            align-items: center;
-            margin: 1em 0;
-            justify-content: space-between;
-            .li {
-                backdrop-filter: blur(10px);
-                list-style-type: none;
-                border-radius: 10px;
-                width: 50px;
-                height: 50px;
+            height: 100%;
+            .ul {
                 display: flex;
-                padding: 0;
+                flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                span {
-                    font-size: 20px;
-                    color: #fff;
-                }
-                &:hover {
-                    border: 1px solid #ff0;
-                    transition: 0.1s all;
-                    cursor: pointer;
-                }
-            }
-            .li_selected {
-                @extend .li;
-                border: 1px solid #ff0;
-            }
-        }
-        hr {
-            width: 100%;
-            height: 2px;
-            background-color: rgb(255, 255, 0);
-        }
-        .calendar_wrapper {
-            position: absolute;
-            width: 300px;
-            right: 20px;
-
-            height: 300px;
-            border-radius: 20px;
-            padding: 20px;
-            backdrop-filter: blur(50px);
-            color: #fff;
-            .header {
-            }
-            .ul_dates {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                align-items: center;
-                flex-wrap: wrap;
-                li {
-                    width: 40px;
-                    height: 40px;
-                    color: #fff;
-                    text-align: center;
-                    margin: 0.1em 0;
-                    line-height: 38px;
-                    font-size: 20px;
+                margin: 1em 0;
+                justify-content: flex-start;
+                .li {
+                    backdrop-filter: blur(10px);
+                    list-style-type: none;
                     border-radius: 10px;
-                    list-style: none;
-                }
-                .li_avaible {
-                    width: 40px;
-                    height: 40px;
-                    color: #fff;
-                    text-align: center;
-                    margin: 0.1em 0;
-                    line-height: 38px;
-                    font-size: 20px;
-                    border-radius: 10px;
-                    border: 1px solid white;
-                    list-style: none;
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    margin-bottom: 1em;
+                    padding: 0;
+                    align-items: center;
+                    justify-content: center;
+                    span {
+                        font-size: 20px;
+                        color: #fff;
+                    }
                     &:hover {
                         border: 1px solid #ff0;
                         transition: 0.1s all;
                         cursor: pointer;
                     }
                 }
-                .li_current {
-                    border-color: rgb(31, 31, 26);
-                    color: #ff0;
+                .li_selected {
+                    @extend .li;
+                    border: 1px solid #ff0;
                 }
-                .li_unavailible {
-                    border: 1px solid white;
-                    border-color: #464545;
-                    color: #5f5e5e;
+            }
+            .calendar_wrapper {
+                position: absolute;
+                width: 310px;
+                right: 20px;
+
+                height: 310px;
+                border-radius: 20px;
+                padding: 20px;
+                z-index: 999;
+                backdrop-filter: blur(50px);
+                color: #fff;
+                .header {
                 }
+                .ul_dates {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    li {
+                        width: 40px;
+                        height: 40px;
+                        color: #fff;
+                        text-align: center;
+                        margin: 0.1em;
+                        line-height: 38px;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        list-style: none;
+                    }
+                    .li_avaible {
+                        width: 40px;
+                        height: 40px;
+                        color: #fff;
+                        text-align: center;
+                        margin: 0.1em;
+                        line-height: 38px;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        outline: 1px solid white;
+                        list-style: none;
+                        &:hover {
+                            outline: 1px solid #ff0;
+                            transition: 0.1s all;
+                            cursor: pointer;
+                        }
+                    }
+                    .li_selected{
+                        width: 40px;
+                        height: 40px;
+                        color: #fff;
+                        text-align: center;
+                        margin: 0.1em;
+                        line-height: 38px;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        outline: 1px solid white;
+                        list-style: none;
+                        span {
+                            font-size: 20px;
+                            color: #fff;
+                        }
+                        &:hover {
+                            outline: 1px solid #ff0;
+                            transition: 0.1s all;
+                            cursor: pointer;
+                        }
+                    }
+                    .li_current {
+                        @extend .li_avaible;
+                        border-color: rgb(31, 31, 26);
+                        color: #ff0;
+                    }
+                    .li_unavailible {
+                        @extend li;
+                        border: 1px solid white;
+                        border-color: #464545;
+                        color: #5f5e5e;
+                    }
+                }
+            }
+            .hr{
+                height: 100%;
+                width: 5px;
+                margin: 0 1em;
+                background-color: white
             }
         }
     }
@@ -453,29 +485,55 @@
                     justify-content: space-evenly;
                     li {
                         margin-bottom: 0.4em;
-                        padding: 0.5em;
                         border: 1px solid #444444;
                         font-size: 12px;
                         list-style: none;
                         width: 250px;
-                        border-radius: 20px;
+                        padding: 0em 0.4em;
+                        border-radius: 0.3em;
                         display: flex;
-                        color: #ffffff;
+                        color: rgb(216, 216, 214);
                         flex-direction: row;
                         align-items: center;
                         justify-content: space-between;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
                         span {
-                            font-size: 14px;
+                            padding: 0.4em;
+                            font-size: 12px;
+                        }
+                        .name {
+                            width: 60%;
+                        }
+                        .price {
+                            width: 20%;
+                        }
+                        .close {
+                            font-size: 12px;
                             background-color: red;
                             color: #fff;
-                            width: 30px;
+                            margin-right: 0.5em;
+                            margin: 1em 0;
+                            width: 25px;
                             margin-left: 1em;
-                            height: 30px;
-                            line-height: 30px;
+                            height: 25px;
+                            line-height: 25px;
+                            padding: 0;
                             text-align: center;
-                            border-radius: 30px;
+                            border-radius: 25px;
                         }
                     }
+                }
+                .error {
+                    @extend input;
+                    border-color: red;
+                }
+                .send_code {
+                    background-color: green;
+                    color: white;
+                    border-radius: 10px;
+                    border: none;
                 }
             }
             .button {

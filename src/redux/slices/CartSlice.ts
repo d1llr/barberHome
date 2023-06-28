@@ -9,7 +9,7 @@ interface Idepartment {
     address: string
 }
 
-interface IService {
+export interface IService {
     id: number,
     name: string,
     price: number
@@ -89,6 +89,10 @@ const cartSlice = createSlice({
             state.date = ''
             state.dateTime = ''
         },
+        RemoveServiceFromOrderPage(state, action: PayloadAction<IService>) {
+            state.services = state.services.filter(item => item.id != action.payload.id)
+        },
+
 
         setCurrentCategory(state, action: PayloadAction<categoryType>) {
             state.categoryType = action.payload
@@ -164,7 +168,8 @@ export const {
     setDates,
     setDateTime,
     removeDateTime,
-    setDepartment
+    setDepartment,
+    RemoveServiceFromOrderPage
 } = cartSlice.actions
 
 export default cartSlice.reducer

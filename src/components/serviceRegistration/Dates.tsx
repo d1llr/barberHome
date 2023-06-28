@@ -34,7 +34,7 @@ const Dates = () => {
 
 
     console.log('render');
-    
+
 
     const setDataId = (day: number) => {
         let index = data.booking_days[today.getMonth() + 1].indexOf(day)
@@ -65,32 +65,32 @@ const Dates = () => {
                     <p>
                         Сегодня {today.getDate()} {months[today.getMonth()]} | {days[today.getDay()]}
                     </p>
-                    <ul>
-                        {isSuccess && data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
-                            if (index < 5) {
-                                return <li
-                                    key={index}
-                                    className={cart.date == setDataId(day) ? styles.li_selected : styles.li}
-                                    onClick={(e) => handleClick(e)}
-                                    data-id={setDataId(day)}
-                                >
-                                    <span>{day}</span>
-                                </li>
-                            }
-                            else {
+                    <div className={styles.dates_wrapper}>
+                        <ul className={styles.ul}>
+                            {isSuccess && data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
+                                if (index < 5) {
+                                    return <li
+                                        key={index}
+                                        className={cart.date == setDataId(day) ? styles.li_selected : styles.li}
+                                        onClick={(e) => handleClick(e)}
+                                        data-id={setDataId(day)}
+                                    >
+                                        <span>{day}</span>
+                                    </li>
+                                }
+                                else {
 
-                            }
-                        })}
-                        <li
-                            className={styles.li}
-                            onClick={() => { setCalendarOpen(prev => !prev) }}
-                        >
-                            <Image src={calendarImage} width={30} height={30} alt="Календарь" />
+                                }
+                            })}
+                            <li
+                                className={styles.li}
+                                onClick={() => { setCalendarOpen(prev => !prev) }}
+                            >
+                                <Image src={calendarImage} width={30} height={30} alt="Календарь" />
 
-                        </li>
-                    </ul>
-                    {
-                        calendarOpen && <div className={styles.calendar_wrapper}>
+                            </li>
+                        </ul>
+                        {calendarOpen && <div className={styles.calendar_wrapper}>
                             <div className={styles.header}>
                                 {monthsI[today.getMonth()]} {today.getFullYear()}
                             </div>
@@ -117,10 +117,13 @@ const Dates = () => {
                                 })}
                             </ul>
                         </div>
-                    }
+                        }
+                        <div className={styles.hr}>
 
-                    <hr></hr>
-                    {cart.date != '' && <Times barber={cart.barber.id} />}
+                        </div>
+                        {cart.date != '' && <Times barber={cart.barber.id} />}
+                    </div>
+
                 </main> :
                 <ErrorPage title="Ошибка" />
     );

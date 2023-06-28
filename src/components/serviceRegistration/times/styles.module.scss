@@ -1,10 +1,10 @@
-.ul{
+.ul {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    justify-content: flex-start !important;
+    justify-content: space-evenly !important;
     flex-wrap: wrap;
-    .li{
+    .li {
         width: 50px;
         height: 50px;
         border-radius: 10px;
@@ -12,11 +12,11 @@
         line-height: 50px;
         color: white;
         border: 1px solid white;
-        margin: .2em;
+        margin: 0.2em 0.3em;
         list-style: none;
-        background-color: rgb(46, 46, 46);
+        backdrop-filter: blur(10px);
     }
-    .li_checked{
+    .li_checked {
         @extend .li;
         border-color: #ff0;
     }

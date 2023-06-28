@@ -1,0 +1,66 @@
+.error {
+    color: red;
+}
+
+.user_main {
+    flex-grow: 2;
+    width: 100%;
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.5em;
+    overflow-y: scroll;
+    .h2 {
+        font-family: "Playfair Display SC", serif;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+    }
+    .ul {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        border-radius: 10px;
+        justify-content: space-around;
+        margin: 0.5em 0;
+        .li {
+            transition-duration: 0.1s;
+            text-transform: uppercase;
+            color: #aaa;
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+            border-bottom: 4px solid transparent;
+            list-style: none;
+            cursor: pointer;
+        }
+        .li_checked {
+            @extend .li;
+            color: #fff;
+            border-bottom: 2px solid #ffe100;
+        }
+    }
+    .logout{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff0;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .record_container{
+        display: flex;
+        flex-direction: column;
+        .record{
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 0.5em;
+        }
+    }
+}

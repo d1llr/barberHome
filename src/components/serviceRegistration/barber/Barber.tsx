@@ -7,6 +7,7 @@ import Image from 'next/image'
 import LoadingPage from '../../loading/LoadingPage'
 import sadSmile from '../../../public/img/sadsmile.png'
 import ErrorPage from '../../error/ErrorPage'
+import ModalWindow from '../order/Modal/ModalWindow'
 
 
 
@@ -84,7 +85,6 @@ const Barber = () => {
                         <ErrorPage title='На выбранные услуги не нашлось мастеров' />
                     }
                 </div>
-
             </main> : <ErrorPage title='Ошибка, отображение барберов невозможно' />
     )
 
