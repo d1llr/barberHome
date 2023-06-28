@@ -142,6 +142,9 @@ const User = () => {
                     {data.data.map((item: IRecord) => {
                         if (item.deleted && stage == 2)
                             return <li className={s.record} key={item.id}>
+                                <span className={s.title}>
+                                    {item.create_date}
+                                </span>
                                 {item.services.map((li) => li.title)}
                             </li>
                     })}
