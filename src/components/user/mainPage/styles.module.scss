@@ -67,7 +67,7 @@
             div {
                 display: flex;
                 flex-direction: row;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: center;
                 .title_date {
                     color: white;
@@ -83,6 +83,7 @@
                     background: #00000088;
                     border-radius: 20px;
                     width: 100%;
+                    height: max-content;
                     padding: 10px;
                     border: 1px solid #444444;
                     display: flex;

@@ -23,7 +23,7 @@ const style = {
     boxShadow: 24,
     display: 'flex',
     flexDirection: 'column',
-    p: 4,
+    padding:'30px 10px 30px 10px'
 };
 
 
