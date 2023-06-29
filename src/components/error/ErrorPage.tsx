@@ -4,14 +4,15 @@ import Image from 'next/image';
 
 
 type IProps = {
-    title:string
+    title: string,
+    desc?: string
 }
 
-const ErrorPage:React.FC<IProps> = ({title}) => {
+const ErrorPage: React.FC<IProps> = ({ title, desc }) => {
     return (
         <div className={styles.unknown}>
             <div className={styles.image_wrapper}>
-                <Image src={sadSmile} width={200} height={200} alt='Фото барбера'/>
+                <Image src={sadSmile} width={200} height={200} alt='Фото барбера' />
             </div>
             <span className={styles.name}>
                 Ошибка
@@ -21,7 +22,7 @@ const ErrorPage:React.FC<IProps> = ({title}) => {
             </span>
             <div className={styles.rating}>
                 <span className={styles.stars}>
-                    Попробуйте позже
+                    {desc ? desc : ' Попробуйте позже'}
                 </span>
             </div>
         </div>

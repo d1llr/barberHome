@@ -122,6 +122,9 @@ const User = () => {
     const { data, isSuccess, isError, isLoading } = useGetUserRecordsQuery({ user_token })
     const [stage, setStage] = useState<stageEnum>(stageEnum.active)
 
+    const isEmptyActive: IRecord[] = []
+    const isEmptyHistory: IRecord[] = []
+
     isLoading && <LoadingPage />
     isError && <ErrorPage title="Ошибка при получении записей" />
 
@@ -163,7 +166,7 @@ const User = () => {
                     {data.data.map((item: IRecord) => {
                         switch (stage) {
                             case stageEnum.active:
-                                if (!item.deleted)
+                                if (!item.deleted) {
                                     return <li className={s.record} key={item.id}>
                                         <div>
                                             <span className={s.title_date}>
@@ -220,9 +223,11 @@ const User = () => {
 
 
                                     </li>
+                                }
                                 break;
                             case stageEnum.history:
-                                if (item.deleted)
+                                if (item.deleted) {
+                                    isEmptyHistory.push(item)
                                     return <li className={s.record} key={item.id}>
                                         <div>
                                             <span className={s.title_date}>
@@ -279,11 +284,16 @@ const User = () => {
 
 
                                     </li>
-                                break;
-                            default:
+                                }
                                 break;
                         }
                     })}
+                    {
+                        (stage == stageEnum.active && isEmptyActive.length == 0) && <ErrorPage title="У вас нет активных записей" desc="Сделайте запись, закрыв личный кабинет" />
+                    }
+                    {
+                        (stage == stageEnum.history && isEmptyHistory.length == 0) && <ErrorPage title="История записей пуста" desc="Сделайте запись, закрыв личный кабинет" />
+                    }
                 </ul>
             }
             {isLoading && <LoadingPage />}

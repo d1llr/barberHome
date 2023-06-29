@@ -57,6 +57,7 @@
     .record_container {
         display: flex;
         flex-direction: column;
+        width: 100%;
         .record {
             border: 1px solid white;
             border-radius: 10px;
