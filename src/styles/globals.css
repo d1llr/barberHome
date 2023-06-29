@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@100;400;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@100;400;500;700&display=swap");
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 #__next {
@@ -16,7 +15,6 @@
   margin: 0 auto;
   background: #0e163d url("https://speedmouse.ru/index/img/4.jpg") no-repeat;
   background-size: cover;
-  padding: 10px 0 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -41,6 +39,5 @@
 
 @media (max-width: 400px) {
   #__next {
-    padding: 10px 0 0px 0;
   }
 }
