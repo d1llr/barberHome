@@ -109,15 +109,19 @@ interface Staff {
 }
 
 
+enum stageEnum {
+    active,
+    history
+}
+
 
 const User = () => {
     const user_token = useAppSelector(state => state.UserSlice.userToken)
     const dispatch = useAppDispatch()
 
-
-
     const { data, isSuccess, isError, isLoading } = useGetUserRecordsQuery({ user_token })
-    const [stage, setStage] = useState(1)
+    const [stage, setStage] = useState<stageEnum>(stageEnum.active)
+
     isLoading && <LoadingPage />
     isError && <ErrorPage title="Ошибка при получении записей" />
 
@@ -147,73 +151,138 @@ const User = () => {
         <main className={s.user_main}>
             <h2 className={s.h2}>Мои записи</h2>
             <ul className={s.ul}>
-                <li className={stage == 1 ? s.li_checked : s.li} onClick={() => setStage(1)}>
+                <li className={stage == stageEnum.active ? s.li_checked : s.li} onClick={() => setStage(stageEnum.active)}>
                     Активные
                 </li>
-                <li className={stage == 2 ? s.li_checked : s.li} onClick={() => setStage(2)}>
+                <li className={stage == stageEnum.history ? s.li_checked : s.li} onClick={() => setStage(stageEnum.history)}>
                     История
                 </li>
             </ul>
             {
                 isSuccess && <ul className={s.record_container}>
                     {data.data.map((item: IRecord) => {
-                        if (item.deleted && stage == 2)
-                            return <li className={s.record} key={item.id}>
-                                <div>
-                                    <span className={s.title_date}>
-                                        {DateConvertation(item.date)}
-                                    </span>
-                                </div>
-                                <div>
-                                    <div className={s.department}>
-                                        <div className={s.image_wrapper}>
-                                            <Image src={item.company.logo} alt='logo' width={100} height={100} />
-                                        </div>
-                                        <span className={s.adress}>
-                                            {item.company.address}
-                                        </span>
-                                        <span className={s.phone}>
-                                            {item.company.phone}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div>
-                                    {item.services.map((li) => {
-                                        return <span className={s.services} key={li.id}>
-                                            <span className={s.title}>
-                                                {li.title}
-                                            </span>
-                                            <span className={s.price}>
-                                                {li.price_max}₽
-                                            </span>
-                                        </span>
-                                    })}
-                                </div>
-                                <div>
-                                    <div className={s.barber}>
-                                        <div className={s.image_wrapper}>
-                                            <Image src={item.staff.avatar} width={200} height={200} alt='Фото барбера' />
-                                        </div>
-                                        <span className={s.name}>
-                                            {item.staff.name}
-                                        </span>
-                                        <span className={s.role}>
-                                            {item.staff.specialization}
-                                        </span>
-                                        <div className={s.rating}>
-                                            <span className={s.stars}>
-                                                ★★★★★
-                                            </span>
-                                            <span className={s.comments}>
-                                                {item.staff.comments_count}
-                                                <Image src={likeImage} width={10} height={10} alt="оценок" />
+                        switch (stage) {
+                            case stageEnum.active:
+                                if (!item.deleted)
+                                    return <li className={s.record} key={item.id}>
+                                        <div>
+                                            <span className={s.title_date}>
+                                                {DateConvertation(item.date)}
                                             </span>
                                         </div>
-                                    </div>
-                                </div>
+                                        <div>
+                                            <div className={s.department}>
+                                                <div className={s.image_wrapper}>
+                                                    <Image src={item.company.logo} alt='logo' width={100} height={100} />
+                                                </div>
+                                                <span className={s.adress}>
+                                                    {item.company.address}
+                                                </span>
+                                                <span className={s.phone}>
+                                                    {item.company.phone}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {item.services.map((li) => {
+                                                return <span className={s.services} key={li.id}>
+                                                    <span className={s.title}>
+                                                        {li.title}
+                                                    </span>
+                                                    <span className={s.price}>
+                                                        {li.price_max}₽
+                                                    </span>
+                                                </span>
+                                            })}
+                                        </div>
+                                        <div>
+                                            <div className={s.barber}>
+                                                <div className={s.image_wrapper}>
+                                                    <Image src={item.staff.avatar} width={200} height={200} alt='Фото барбера' />
+                                                </div>
+                                                <span className={s.name}>
+                                                    {item.staff.name}
+                                                </span>
+                                                <span className={s.role}>
+                                                    {item.staff.specialization}
+                                                </span>
+                                                <div className={s.rating}>
+                                                    <span className={s.stars}>
+                                                        ★★★★★
+                                                    </span>
+                                                    <span className={s.comments}>
+                                                        {item.staff.comments_count}
+                                                        <Image src={likeImage} width={10} height={10} alt="оценок" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-                            </li>
+                                    </li>
+                                break;
+                            case stageEnum.history:
+                                if (item.deleted)
+                                    return <li className={s.record} key={item.id}>
+                                        <div>
+                                            <span className={s.title_date}>
+                                                {DateConvertation(item.date)}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div className={s.department}>
+                                                <div className={s.image_wrapper}>
+                                                    <Image src={item.company.logo} alt='logo' width={100} height={100} />
+                                                </div>
+                                                <span className={s.adress}>
+                                                    {item.company.address}
+                                                </span>
+                                                <span className={s.phone}>
+                                                    {item.company.phone}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {item.services.map((li) => {
+                                                return <span className={s.services} key={li.id}>
+                                                    <span className={s.title}>
+                                                        {li.title}
+                                                    </span>
+                                                    <span className={s.price}>
+                                                        {li.price_max}₽
+                                                    </span>
+                                                </span>
+                                            })}
+                                        </div>
+                                        <div>
+                                            <div className={s.barber}>
+                                                <div className={s.image_wrapper}>
+                                                    <Image src={item.staff.avatar} width={200} height={200} alt='Фото барбера' />
+                                                </div>
+                                                <span className={s.name}>
+                                                    {item.staff.name}
+                                                </span>
+                                                <span className={s.role}>
+                                                    {item.staff.specialization}
+                                                </span>
+                                                <div className={s.rating}>
+                                                    <span className={s.stars}>
+                                                        ★★★★★
+                                                    </span>
+                                                    <span className={s.comments}>
+                                                        {item.staff.comments_count}
+                                                        <Image src={likeImage} width={10} height={10} alt="оценок" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </li>
+                                break;
+                            default:
+                                break;
+                        }
                     })}
                 </ul>
             }
