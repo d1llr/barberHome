@@ -15,19 +15,16 @@ const CompanyChoise = () => {
     const department = useAppSelector(state => state.cartSlice.department)
 
     return (
-        <main className={styles.main}>
-            {/* <span className={styles.header_text}>
+        <>
+            {isSuccess && <main className={styles.main}>
+                {/* <span className={styles.header_text}>
                 В какое отделение?
             </span> */}
-
-            {isLoading && <LoadingPage />}
-
-            {isSuccess &&
-                data.map((item: ICompany, index: number) => {
+                {data.map((item: ICompany, index: number) => {
                     return <div
                         className={department.id == item.id ? styles.department_checked : styles.department}
                         key={index}
-                        onClick={() => dispatch(setDepartment({id: item.id, address: item.address}))}
+                        onClick={() => dispatch(setDepartment({ id: item.id, address: item.address }))}
                     >
                         <div className={styles.image_wrapper}>
                             <Image src={item.logo} alt='logo' width={100} height={100} />
@@ -40,17 +37,16 @@ const CompanyChoise = () => {
                         </span>
                     </div>
                 })
-            }
+                }
+                {isError && <button className={styles.next_stage}><span>Ошибка</span></button>}
+                {department.id != 0 ?
+                    <button className={styles.next_stage} onClick={() => dispatch(nextStage(1))}><span>Перейти к заказу</span></button>
+                    :
+                    <button className={styles.next_stage_disable}><span>Перейти к заказу</span></button>}
+            </main>}
+            {isLoading && <LoadingPage />}
+        </>
 
-            {isError && <button className={styles.next_stage}><span>Ошибка</span></button>}
-            
-            {
-                department.id != 0 ?
-                <button className={styles.next_stage} onClick={() => dispatch(nextStage(1))}><span>Перейти к заказу</span></button>
-                :
-                <button className={styles.next_stage_disable}><span>Перейти к заказу</span></button>
-            }
-        </main>
     );
 }
 
