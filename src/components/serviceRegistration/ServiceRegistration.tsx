@@ -130,7 +130,7 @@ const ServiceRegistration = () => {
                 </div>
             </div>
             {switcher(stage)}
-            <div className={styles.buttons_container}>
+            <div className={stage >= 1 && cart.services.length != 0 ? styles.buttons_container : styles.buttons_container_inactive }>
                 {
                     stage > 1 &&
                     <button onClick={() => dispatch(prevStage())}>
