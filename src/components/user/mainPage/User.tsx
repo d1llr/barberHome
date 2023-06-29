@@ -1,6 +1,5 @@
 import { useGetUserRecordsQuery } from "@/redux/api/getUserRecords";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-
 import s from './styles.module.scss'
 import { useState } from "react";
 import LoadingPage from "@/components/loading/LoadingPage";
@@ -8,7 +7,10 @@ import ErrorPage from "@/components/error/ErrorPage";
 import Image from "next/image";
 import logOutImage from '../../../../public/img/exit.png'
 import { UserStages, setUserStage } from "@/redux/slices/UserSlice";
-import { Ultra } from "next/font/google";
+import likeImage from '../../../../public/img/like.png'
+
+
+
 
 
 interface IRecord {
@@ -125,6 +127,21 @@ const User = () => {
     }
 
 
+    const DateConvertation = (value: string): string => {
+        const date: Date = new Date(value);
+
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            weekday: 'short'
+        };
+
+        return date.toLocaleDateString('ru-RU', options);
+    }
+
 
     return (
         <main className={s.user_main}>
@@ -142,10 +159,60 @@ const User = () => {
                     {data.data.map((item: IRecord) => {
                         if (item.deleted && stage == 2)
                             return <li className={s.record} key={item.id}>
-                                <span className={s.title}>
-                                    {item.create_date}
-                                </span>
-                                {item.services.map((li) => li.title)}
+                                <div>
+                                    <span className={s.title_date}>
+                                        {DateConvertation(item.date)}
+                                    </span>
+                                </div>
+                                <div>
+                                    <div className={s.department}>
+                                        <div className={s.image_wrapper}>
+                                            <Image src={item.company.logo} alt='logo' width={100} height={100} />
+                                        </div>
+                                        <span className={s.adress}>
+                                            {item.company.address}
+                                        </span>
+                                        <span className={s.phone}>
+                                            {item.company.phone}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    {item.services.map((li) => {
+                                        return <span className={s.services}>
+                                            <span className={s.title}>
+                                                {li.title}
+                                            </span>
+                                            <span className={s.price}>
+                                                {li.price_max}₽
+                                            </span>
+                                        </span>
+                                    })}
+                                </div>
+                                <div>
+                                    <div className={s.barber}>
+                                        <div className={s.image_wrapper}>
+                                            <Image src={item.staff.avatar} width={200} height={200} alt='Фото барбера' />
+                                        </div>
+                                        <span className={s.name}>
+                                            {item.staff.name}
+                                        </span>
+                                        <span className={s.role}>
+                                            {item.staff.specialization}
+                                        </span>
+                                        <div className={s.rating}>
+                                            <span className={s.stars}>
+                                                ★★★★★
+                                            </span>
+                                            <span className={s.comments}>
+                                                {item.staff.comments_count}
+                                                <Image src={likeImage} width={10} height={10} alt="оценок"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </li>
                     })}
                 </ul>
