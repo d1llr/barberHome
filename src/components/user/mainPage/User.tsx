@@ -179,7 +179,7 @@ const User = () => {
                                 </div>
                                 <div>
                                     {item.services.map((li) => {
-                                        return <span className={s.services}>
+                                        return <span className={s.services} key={li.id}>
                                             <span className={s.title}>
                                                 {li.title}
                                             </span>
@@ -206,7 +206,7 @@ const User = () => {
                                             </span>
                                             <span className={s.comments}>
                                                 {item.staff.comments_count}
-                                                <Image src={likeImage} width={10} height={10} alt="оценок"/>
+                                                <Image src={likeImage} width={10} height={10} alt="оценок" />
                                             </span>
                                         </div>
                                     </div>
