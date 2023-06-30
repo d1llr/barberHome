@@ -1,15 +1,14 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
-import { closeModal, openModal } from '@/redux/slices/UserModalSlice';
-import { useForm } from 'react-hook-form';
-import InputMask from "react-input-mask";
-import s from './styles.module.scss'
+import { closeModal } from '@/redux/slices/UserModalSlice';
 import Auth from './auth/Auth';
 import { UserStages, setUserStage } from '@/redux/slices/UserSlice';
 import User from './mainPage/User';
 import { useEffect } from 'react';
+import quitImage from '../../../public/img/back.png'
+import Image from 'next/image';
+import s from './styles.module.scss'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -23,7 +22,7 @@ const style = {
     boxShadow: 24,
     display: 'flex',
     flexDirection: 'column',
-    padding:'30px 10px 30px 10px'
+    padding: '15px 10px 30px 10px'
 };
 
 
@@ -60,7 +59,9 @@ export default function UserModal() {
             sx={{ backdropFilter: "blur(10px)" }}
         >
             <Box sx={style}>
-
+                <span className={s.quit_button} onClick={()=>handleClose()}>
+                    <Image src={quitImage} width={15} height={15} alt={'Назад'} />
+                </span>
                 {switcher(userStage)}
             </Box>
         </Modal >

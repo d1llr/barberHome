@@ -16,6 +16,8 @@ import { sendCode } from './api/sendCode';
 import UserSlice from './slices/UserSlice';
 import { UserAuth } from './api/UserAuth';
 import { getUserRecords } from './api/getUserRecords';
+import { createNewRecord } from './api/createNewRecord';
+import { deleteUserRecord } from './api/deleteUserRecord';
 
 
 
@@ -30,6 +32,8 @@ const makeStore = () =>
       [sendCode.reducerPath]: sendCode.reducer,
       [UserAuth.reducerPath]: UserAuth.reducer,
       [getUserRecords.reducerPath]: getUserRecords.reducer,
+      [createNewRecord.reducerPath]: createNewRecord.reducer,
+      [deleteUserRecord.reducerPath]: deleteUserRecord.reducer,
       stageSlice: StageSlice,
       cartSlice: CartSlice,
       ModalSlice: ModalSlice,
@@ -39,14 +43,17 @@ const makeStore = () =>
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
-        getBarber.middleware, 
-        getCompany.middleware, 
-        getServices.middleware, 
-        getDates.middleware, 
-        getTimes.middleware, 
-        sendCode.middleware, 
-        UserAuth.middleware, 
-        getUserRecords.middleware),
+        getBarber.middleware,
+        getCompany.middleware,
+        getServices.middleware,
+        getDates.middleware,
+        getTimes.middleware,
+        sendCode.middleware,
+        UserAuth.middleware,
+        getUserRecords.middleware,
+        createNewRecord.middleware,
+        deleteUserRecord.middleware
+      ),
   });
 
 export const store = makeStore()

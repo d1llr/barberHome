@@ -3,14 +3,18 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 interface IState {
     isOpen: boolean,
     phone: string,
-    name: string
+    fullname: string,
+    email: string,
+    comment: string
 }
 
 
 const initialState = {
     isOpen: false,
     phone: '',
-    name: ''
+    fullname: '',
+    email: '',
+    comment: ''
 } as IState
 
 export const modal = createSlice({
@@ -20,7 +24,9 @@ export const modal = createSlice({
         openModal: (state, action: PayloadAction<IState>) => {
             state.isOpen = true
             state.phone = action.payload.phone
-            state.name = action.payload.name
+            state.fullname = action.payload.fullname
+            state.email = action.payload.email
+            state.comment = action.payload.comment
         },
         closeModal: (state) => {
             state.isOpen = false

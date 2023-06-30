@@ -9,6 +9,7 @@ import Modal from 'react-modal'
 import { useState } from 'react';
 import ModalWindow from './Modal/ModalWindow';
 import { openModal } from '@/redux/slices/ModalSlice';
+import { useSendCodeMutation } from '@/redux/api/sendCode';
 
 
 
@@ -34,24 +35,33 @@ const Form = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const cart = useAppSelector(state => state.cartSlice)
   const dispatch = useAppDispatch()
+  const [sendCode, { isLoading, isSuccess, isUninitialized }] = useSendCodeMutation()
 
-  const onSubmit = (data: FormValues) => {
 
+
+  const onSubmit = async (data: FormValues) => {
     data.department = cart.department.id.toString()
     data.services = cart.services.map(item => item.id)
     data.staff_id = cart.barber.id
     data.datetime = cart.dateTime
     setIsOpen(true)
-    dispatch(openModal({ phone: data.phone, name: data.name, isOpen: true }))
     data.phone = data.phone.replace(/[+()-\s]+/g, "");
     console.log(data);
-    setIsOpen(true)
-    dispatch(openModal({ phone: data.phone, name: data.name, isOpen: true }))
+    dispatch(openModal({
+      phone: data.phone,
+      fullname: data.name,
+      email: data.email,
+      comment: data.comment,
+      isOpen: true
+    }))
+    const payload = await sendCode(
+      {
+        phone: data.phone.replace(/[+()-\s]+/g, ""),
+        departmentID: cart.department.id
+      })
+    console.log('fulfilled', payload)
   };
 
-  const codeSubmit = (data: FormValues) => {
-
-  }
 
   const validateEmail: RegisterOptions = {
     required: true,
