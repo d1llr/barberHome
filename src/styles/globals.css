@@ -13,6 +13,7 @@
   max-width: 576px;
   height: 100vh;
   margin: 0 auto;
+  overflow: hidden;
   background: #0e163d url("https://speedmouse.ru/index/img/4.jpg") no-repeat;
   background-size: cover;
   display: -webkit-box;
