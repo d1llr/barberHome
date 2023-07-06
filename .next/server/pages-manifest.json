@@ -1,0 +1,17 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/api/deleteUserRecord": "pages/api/deleteUserRecord.js",
+  "/api/createNewRecord": "pages/api/createNewRecord.js",
+  "/api/getBarber": "pages/api/getBarber.js",
+  "/api/getCompany": "pages/api/getCompany.js",
+  "/api/getDates": "pages/api/getDates.js",
+  "/api/getServices": "pages/api/getServices.js",
+  "/api/getTimes": "pages/api/getTimes.js",
+  "/api/getUserRecords": "pages/api/getUserRecords.js",
+  "/api/sendCode": "pages/api/sendCode.js",
+  "/api/userAuth": "pages/api/userAuth.js",
+  "/": "pages/index.html",
+  "/404": "pages/404.html"
+}
