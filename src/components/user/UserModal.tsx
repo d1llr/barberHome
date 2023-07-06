@@ -22,7 +22,7 @@ const style = {
     boxShadow: 24,
     display: 'flex',
     flexDirection: 'column',
-    padding: '15px 10px 30px 10px'
+    padding: '25px 10px 30px 10px'
 };
 
 
