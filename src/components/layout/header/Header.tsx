@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import img from '../../../../public/img/razor.png'
 import loginImage from '../../../../public/img/lk.png'
 import { useAppDispatch, useAppSelector } from '@/redux/store';
-
+import mapImage from '../../../../public/img/map.png'
 import backImage from '../../../../public/img/back.png'
 import { prevStage } from '@/redux/slices/StageSlice';
 
@@ -33,7 +33,7 @@ const Header = () => {
                 </div> :
                 <div className={styles.location_wrapper}>
                     <div className={styles.location}>
-                        <Image src={'https://speedmouse.ru/index/img/map.png'} alt='location' width={20} height={20} />
+                        <Image src={mapImage} alt='location' width={20} height={20} />
                         <span>Москва</span>
                     </div>
                     <div className={styles.image_container}>
