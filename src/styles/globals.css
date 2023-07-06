@@ -42,3 +42,7 @@
   #__next {
   }
 }
+
+input {
+  -webkit-appearance: none;
+}
