@@ -41,11 +41,12 @@
             color: #777;
             text-align: center;
         }
-
     }
     .department_checked {
         @extend .department;
-        outline: 1px solid #ff0;    
+        .image_wrapper {
+            outline: 3px solid #ff0;
+        }
     }
     .next_stage {
         z-index: 99;
@@ -80,7 +81,7 @@
         position: relative;
         text-decoration: none;
     }
-    .next_stage_disable{
+    .next_stage_disable {
         @extend .next_stage;
         background: #686867;
         box-shadow: none;

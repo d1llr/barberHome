@@ -6,7 +6,7 @@ import InputMask from "react-input-mask";
 import ruLocale from "date-fns/locale/ru";
 import { IService, RemoveServiceFromOrderPage } from '@/redux/slices/CartSlice';
 import Modal from 'react-modal'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ModalWindow from './Modal/ModalWindow';
 import { openModal } from '@/redux/slices/ModalSlice';
 import { useSendCodeMutation } from '@/redux/api/sendCode';
@@ -36,7 +36,7 @@ const Form = () => {
   const cart = useAppSelector(state => state.cartSlice)
   const dispatch = useAppDispatch()
   const [sendCode, { isLoading, isSuccess, isUninitialized }] = useSendCodeMutation()
-
+  const nameRef = useRef()
 
 
   const onSubmit = async (data: FormValues) => {
@@ -54,6 +54,9 @@ const Form = () => {
       comment: data.comment,
       isOpen: true
     }))
+    localStorage.setItem('name', data.name)
+    localStorage.setItem('phone', data.phone)
+    localStorage.setItem('email', data.email)
     const payload = await sendCode(
       {
         phone: data.phone.replace(/[+()-\s]+/g, ""),
@@ -77,6 +80,7 @@ const Form = () => {
       dispatch(RemoveServiceFromOrderPage(event))
     }
   }
+
 
 
   const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
@@ -122,7 +126,7 @@ const Form = () => {
         </div>
         <div>
           <label>Ваше имя</label>
-          <input type="text" {...register("name")} required className={errors.name && s.error} onFocus={(e) => e.currentTarget.classList.remove(s.error)} />
+          <input type="text" {...register("name")} required className={errors.name && s.error} onFocus={(e) => e.currentTarget.classList.remove(s.error)} value={localStorage.getItem('name') || undefined} />
 
         </div>
         <div>
@@ -137,6 +141,7 @@ const Form = () => {
             placeholder='Введите номер телефона'
             className={errors.phone && s.error}
             onFocus={(e) => e.currentTarget.classList.remove(s.error)}
+            value={localStorage.getItem('phone') || undefined}
           />
         </div>
         <div>
@@ -148,6 +153,7 @@ const Form = () => {
             placeholder='Введите ваш email'
             className={errors.email && s.error}
             onFocus={(e) => e.currentTarget.classList.remove(s.error)}
+            value={localStorage.getItem('email') || undefined}
           />
         </div>
         <div>

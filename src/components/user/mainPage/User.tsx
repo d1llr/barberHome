@@ -193,7 +193,7 @@ const User = () => {
                             case stageEnum.active:
                                 if (!item.deleted) {
                                     isEmptyActive.push(item)
-                                    if (item.company.title == 'BARBAR HOME')
+                                    if (item.company.title.includes('BARBAR HOME'))
                                         return <li className={s.record} key={item.id}>
                                             <div>
                                                 <span className={s.title_date}>
