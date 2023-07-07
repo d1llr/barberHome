@@ -77,20 +77,17 @@ export default function ModalWindow() {
         >
             <Box sx={style}>
                 {
-                    isUninitialized &&
-                    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-                        <div>
-                            <label>
-                                Введите код, отправленный на {open.phone.replace(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/, '+$1($2)$3-$4-$5')}
-                            </label>
-                            <input {...register("code")} className={isError ? s.error : s.input}>
-                            </input>
-                        </div>
-                        <button type='submit' className={s.button}>Подтвердить</button>
-                    </form>
-                }
-                {
-                    isLoading && <LoadingPage />
+                    isLoading ? <LoadingPage /> : !isSuccess &&
+                        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+                            <div>
+                                <label>
+                                    Введите код, отправленный на {open.phone.replace(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/, '+$1($2)$3-$4-$5')}
+                                </label>
+                                <input {...register("code")} className={isError ? s.error : s.input}>
+                                </input>
+                            </div>
+                            <button type='submit' className={s.button}>Подтвердить</button>
+                        </form>
                 }
                 {isSuccess && <div className={s.success_container}>
                     Запись успешно создана!

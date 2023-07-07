@@ -1,7 +1,7 @@
 import { useGetUserRecordsQuery } from "@/redux/api/getUserRecords";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import s from './styles.module.scss'
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {  useState } from "react";
 import LoadingPage from "@/components/loading/LoadingPage";
 import ErrorPage from "@/components/error/ErrorPage";
 import Image from "next/image";

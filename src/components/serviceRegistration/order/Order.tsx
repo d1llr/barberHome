@@ -78,6 +78,8 @@ const Form = () => {
   const handleClick = (event: IService) => {
     if (event) {
       dispatch(RemoveServiceFromOrderPage(event))
+
+
     }
   }
 
@@ -98,7 +100,7 @@ const Form = () => {
         <div>
           <label>Услуга</label>
           <ul>
-            {cart.services.map(item => {
+            {cart.services.length != 0 ? cart.services.map(item => {
               return <li key={item.id}>
                 <span className={s.name}>{item.name}</span>
                 <span className={s.price}>{item.price}₽</span>
@@ -113,7 +115,11 @@ const Form = () => {
                 >&#10006;
                 </span>
               </li>
-            })}
+            }) :
+              <li className={s.empty_services}>
+                <span className={s.name}>Список услуг пуст</span>
+              </li>
+            }
           </ul>
         </div>
         <div>
@@ -160,7 +166,7 @@ const Form = () => {
           <label>Комментарий</label>
           <input type="text" {...register("comment")} />
         </div>
-        <button type='submit' className={s.button}> Отправить </button>
+        <button type='submit' className={cart.services.length !== 0 ? s.button : s.button_disable}> Отправить </button>
       </form>
       {isOpen && <ModalWindow />}
     </main>

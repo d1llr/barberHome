@@ -538,6 +538,14 @@
                     border-radius: 10px;
                     border: none;
                 }
+                .empty_services{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    span{
+                        text-align: center;
+                    }
+                }
             }
             .button {
                 width: 50%;
@@ -548,6 +556,12 @@
                 font-size: 20px;
                 color: #ffff;
                 background: none;
+            }
+            .button_disable{
+                @extend .button;
+                border: 1px solid #666565;
+                color: #666565;
+                pointer-events: none;
             }
         }
         hr {
