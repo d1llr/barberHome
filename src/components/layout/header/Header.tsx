@@ -14,6 +14,7 @@ import logo from '../../../../public/img/logotype.png'
 import { openModal } from '@/redux/slices/UserModalSlice';
 import UserModal from '@/components/user/UserModal';
 import { UserStages, setUserStage } from '@/redux/slices/UserSlice';
+import { setStage } from '@/redux/slices/orderStageSlice';
 const Header = () => {
 
     const state = useAppSelector(state => state.stageSlice.stage == 0 ? undefined : state.stageSlice)
@@ -24,7 +25,10 @@ const Header = () => {
         <header className={styles.header}>
             {state &&
                 <div className={styles.backImage_wrapper}>
-                    <Image src={backImage} alt='Back image' width={20} height={20} onClick={() => dispatch(prevStage())} />
+                    <Image src={backImage} alt='Back image' width={20} height={20} onClick={() => {
+                        dispatch(prevStage())
+                        dispatch(setStage(1))
+                    }} />
                 </div>
             }
             {state ?
