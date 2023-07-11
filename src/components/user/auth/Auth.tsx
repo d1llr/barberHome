@@ -39,7 +39,6 @@ interface resp {
         login: string
         email: string
         avatar: string
-
     }
 
 }

@@ -67,7 +67,7 @@ const Dates = () => {
                     </p>
                     <div className={styles.dates_wrapper}>
                         <ul className={styles.ul}>
-                            {isSuccess && data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
+                            {(isSuccess &&  data.booking_days[today.getMonth() + 1]) && data.booking_days[today.getMonth() + 1].map((day: number, index: number) => {
                                 if (index < 5) {
                                     return <li
                                         key={index}

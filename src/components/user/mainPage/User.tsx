@@ -1,7 +1,7 @@
 import { useGetUserRecordsQuery } from "@/redux/api/getUserRecords";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import s from './styles.module.scss'
-import {  useState } from "react";
+import { useState } from "react";
 import LoadingPage from "@/components/loading/LoadingPage";
 import ErrorPage from "@/components/error/ErrorPage";
 import Image from "next/image";
@@ -115,6 +115,11 @@ enum stageEnum {
     history
 }
 
+interface IRoot {
+    login: string,
+    password: string
+}
+
 const CancelOrder = ({ record_id, user_token }: { record_id: number, user_token: string | null }) => {
     const [deleteRecord, { isLoading, isSuccess, isUninitialized }] = useDeleteUserRecordMutation()
 
@@ -127,7 +132,6 @@ const CancelOrder = ({ record_id, user_token }: { record_id: number, user_token:
         console.log('fulfilled', payload)
     }
 
-
     return (
         <div className={isSuccess ? s.cancel_success : s.cancel_order} onClick={() => handleDelete(record_id)}>
             {isUninitialized && <span>Отметить запись</span>}
@@ -135,8 +139,6 @@ const CancelOrder = ({ record_id, user_token }: { record_id: number, user_token:
             {isSuccess && <span>Запись успешно удалена</span>}
         </div>)
 }
-
-
 
 
 const User = () => {

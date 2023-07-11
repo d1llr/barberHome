@@ -151,7 +151,7 @@ const ServiceRegistration = () => {
                             </button>
                             :
                             stage == 3 ?
-                                cart.date != '' &&
+                                cart.dateTime != '' &&
                                 <button onClick={() => dispatch(nextStage())}>
                                     Далее
                                 </button>
